@@ -1,63 +1,30 @@
 import React from "react"
-import { StyleSheet, View, ScrollView } from "react-native"
-import { Avatar, Text, Card, Button, List, ListItem, Badge } from "react-native-elements"
+import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native"
+import { Avatar, Text, Card, Button, List, ListItem, Badge, Input } from "react-native-elements"
+import Icon from "react-native-vector-icons/FontAwesome"
+import { StackNavigator } from "react-navigation"
+
+import { Root } from "./router"
 import { storage } from "./Storage"
 
 
 export default class App extends React.Component {
+  state = {
+    openNewDeck: false
+  }
 
-
-  render() {
+  render () {
     const list = storage
-
+    const {openNewDeck} = this.state
 
     return (
-      <View style={styles.container}>
-        <View>
-          <Avatar
-            medium
-            rounded
-            source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}}
-          />
-          <Text h4>Sujin Lee</Text>
-        </View>
-        <View>
-          <DeckList
-            list={list}
-          />
-        </View>
 
+      <View style={styles.container}>
+        <Root />
       </View>
     )
   }
 }
-
-const DeckList = ({list}) =>
-  <List>
-    {
-      Object.keys(list).map((k, i) =>
-        <Deck
-          key={i}
-          title={list[k].title}
-          quizNum={0}
-        />
-      )
-    }
-
-    <Card
-      title="Add New"
-    />
-  </List>
-
-const Deck = ({title, quizNum = 0}) =>
-  <Card
-    title={title}
-  >
-    <Badge
-      value={quizNum}
-      textStyle={{color: "orange"}}
-    />
-  </Card>
 
 
 const styles = StyleSheet.create({
