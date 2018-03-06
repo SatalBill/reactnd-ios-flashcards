@@ -1,16 +1,21 @@
 import React, { Component } from "react"
-import { StyleSheet, View } from "react-native"
+import { View } from "react-native"
 import { Avatar, Text, Card, Button, List, ListItem, Badge, Input } from "react-native-elements"
-
+import { connect } from "react-redux"
+import styles from "./styles"
+import { receiveDecks } from "../../actions"
 
 export class DeckList extends Component {
-
+  componentDidMount () {
+    console.log(this.props)
+  }
   onPress = () => {
     this.props.navigation.navigate("NewDeckView")
   }
 
   render () {
-    const {list} = this.props
+    console.log(this.props)
+    const {list} = this.props.list || []
     return (
       <View style={styles.container}>
         <View>
@@ -58,11 +63,22 @@ const Deck = ({title, quizNum = 0}) =>
     />
   </Card>
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+
+
+const mapStateToProps = state => {
+  return {
+    list: state.decks
   }
-})
+}
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+    receiveDecks : () => dispatch(receiveDecks())
+  }
+}
+
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckList)

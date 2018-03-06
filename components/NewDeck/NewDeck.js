@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from "react"
 import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native"
 import { Avatar, Text, Card, Button, List, ListItem, Badge, Input } from "react-native-elements"
-import { StackNavigator } from 'react-navigation'
-
+import styles from "./styles"
 
 export const NewDeck = () => (
   <View>
