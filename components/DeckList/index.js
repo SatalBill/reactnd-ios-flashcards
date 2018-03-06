@@ -1,7 +1,5 @@
 import {DeckList} from "./DeckList"
 
+export default DeckList
 
-export {
-  DeckList
 
-}

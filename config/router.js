@@ -1,10 +1,10 @@
 import React from "react"
 import { StackNavigator } from "react-navigation"
-import { DeckList }  from "./DeckList"
-import { NewDeck } from "./NewDeck"
+import  DeckList   from "./components/DeckList"
+import { NewDeck } from "./components/NewDeck/NewDeck"
 
 
-export const Root = StackNavigator({
+const Root = StackNavigator({
   Home: {
     screen: DeckList,
   },
@@ -15,3 +15,6 @@ export const Root = StackNavigator({
   mode: "modal",
   headerMode: "none",
 })
+
+
+export default Root
