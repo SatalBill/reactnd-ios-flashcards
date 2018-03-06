@@ -1,4 +1,4 @@
-import { RECEIVE_DECKS, RECEIVE_DECK } from "../action"
+import { RECEIVE_DECKS, RECEIVE_DECK } from "../actions"
 
 
 const INITIAL_STATE = {

@@ -1,37 +1,15 @@
-import React from "react"
-import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native"
-import { Avatar, Text, Card, Button, List, ListItem, Badge, Input } from "react-native-elements"
-import Icon from "react-native-vector-icons/FontAwesome"
-import { StackNavigator } from "react-navigation"
+import React, { Component } from "react"
+import Root from "./config/router"
+import store from "./config/store"
+import { Provider } from "react-redux"
 
-import { Root } from "./router"
-import { storage } from "./Storage"
-
-
-export default class App extends React.Component {
-  state = {
-    openNewDeck: false
-  }
+export default class App extends Component {
 
   render () {
-    const list = storage
-    const {openNewDeck} = this.state
-
     return (
-
-      <View style={styles.container}>
-        <Root />
-      </View>
+      <Provider store={store}>
+        <Root/>
+      </Provider>
     )
   }
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-})
