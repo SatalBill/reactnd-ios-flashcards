@@ -1,13 +1,14 @@
 import { AsyncStorage } from "react-native"
 
-export const getDecks = () => {
-
+export const getDecks = async () => {
+  return await AsyncStorage.getItem("decks")
 }
 
-export const getDeck = ({key}) => {
+export  const getDeck = async ({key}) => {
   /*
   Take in a single id argument and return the deck associated with that id
    */
+
 }
 
 export const saveDeckTitle = ({title}) => {
