@@ -28,18 +28,19 @@ const SAMPLE_DECKS = {
 }
 
 const INITIAL_STATE = {
-  currentScreen: null,
   currentDeck: null,
-  decks: SAMPLE_DECKS
+  list: SAMPLE_DECKS
 }
 
 
 const decks = (state = INITIAL_STATE, action) => {
+
+  const {decks} = action
   switch (action.type) {
     case RECEIVE_DECKS:
       return {
         ...state,
-        ...action.decks
+        ...decks
       }
     default:
       return state

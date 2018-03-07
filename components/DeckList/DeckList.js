@@ -66,17 +66,16 @@ const Deck = ({title, quizNum = 0}) =>
   </Card>
 
 
-
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    list: state.decks
+    list: state.decks.list
   }
 }
 
 
 const mapDispatchToProps = dispatch => {
   return {
-    receiveDecks : () => dispatch(receiveDecks())
+    receiveDecks: () => dispatch(receiveDecks())
   }
 }
 

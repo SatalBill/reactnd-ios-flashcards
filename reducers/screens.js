@@ -4,16 +4,17 @@ const INITIAL_STATE = {
   currentScreen: null
 }
 
-const screen = (state = INITIAL_STATE, action) => {
+const screens = (state = INITIAL_STATE, action) => {
+  const {currentScreen} = action
   switch (action.type) {
     case CHANGE_SCREEN:
       return {
         ...state,
-        ...action.currentScreen
+        ...currentScreen
       }
     default:
       return state
   }
 }
 
-export default screen
+export default screens

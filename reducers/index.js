@@ -1,10 +1,12 @@
-
 import { combineReducers } from "redux"
 import decks from "./decks"
-import screen from "./screen"
+import screens from "./screens"
 
-
+//
 export default combineReducers({
-  screen,
+  screens,
   decks
 })
+
+
+// export default decks
