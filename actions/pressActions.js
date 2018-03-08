@@ -7,8 +7,9 @@ export const receiveDecks = () => {
 }
 
 
-export const changeScreen = () => {
+export const changeScreen = (preView, currentView) => {
   return {
-    type: CHANGE_SCREEN
+    type: CHANGE_SCREEN,
+    preView, currentView
   }
 }

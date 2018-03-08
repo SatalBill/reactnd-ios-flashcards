@@ -1,15 +1,18 @@
 import React, { Component } from "react"
-import Root from "./config/router"
-import store from "./config/store"
+import Store from "./config/store"
 import { Provider } from "react-redux"
+
+import AppWithNavigationState from './components/AppNavigator'
 
 export default class App extends Component {
 
   render () {
     return (
-      <Provider store={store}>
-        <Root/>
+      <Provider store={Store}>
+        <AppWithNavigationState />
+
       </Provider>
     )
   }
 }
+

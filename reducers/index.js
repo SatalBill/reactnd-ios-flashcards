@@ -1,11 +1,11 @@
 import { combineReducers } from "redux"
 import decks from "./decks"
-import screens from "./screens"
+import nav from "./nav"
 
 //
 export default combineReducers({
-  screens,
-  decks
+  decks,
+  nav
 })
 
 

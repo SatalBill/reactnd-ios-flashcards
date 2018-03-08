@@ -1,4 +1,4 @@
-import {NewDeck} from "./NewDeck"
+import NewDeck from "./NewDeck"
 
 export default NewDeck
 
