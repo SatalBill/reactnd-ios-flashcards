@@ -6,29 +6,39 @@ import styles from "./styles"
 
 class NewDeck extends Component {
 
+  constructor (props) {
+    super(props)
+    this.state = {
+      title: '',
+      _isFilled: false
+    }
+  }
+
+  onTitleChange = (title) => {
+    const _isFilled = title.length > 0
+    this.setState({title, _isFilled})
+  }
+
   submit = () => {
-    this.props.navigation.dispatch({ type: 'OPEN_HOME_SCREEN' })
+    return this.state._isFilled ?
+      this.props.navigation.dispatch({type: 'OPEN_HOME_SCREEN'}) : null
   }
 
   render () {
+    const buttonStyle = this.state.title.length === 0 ? styles.inactivedButton : styles.activedButton
+
     return (
       <View style={styles.container}>
         <Input
           placeholder="Write Deck Title"
+          onChangeText={this.onTitleChange}
         />
         <Button
           text="SUBMIT"
           //loading
           //loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
           textStyle={{fontWeight: "700"}}
-          buttonStyle={{
-            backgroundColor: "rgba(92, 99,216, 1)",
-            width: 300,
-            height: 45,
-            borderColor: "transparent",
-            borderWidth: 0,
-            borderRadius: 5
-          }}
+          buttonStyle={buttonStyle}
           containerStyle={{marginTop: 20}}
           onPress={this.submit}
         />
@@ -38,27 +48,3 @@ class NewDeck extends Component {
 }
 
 export default NewDeck
-
-//
-// export const NewDeck = () => (
-//   <View>
-//     <Input
-//       placeholder="Write Deck Title"
-//     />
-//     <Button
-//       text="SUBMIT"
-//       //loading
-//       //loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
-//       textStyle={{fontWeight: "700"}}
-//       buttonStyle={{
-//         backgroundColor: "rgba(92, 99,216, 1)",
-//         width: 300,
-//         height: 45,
-//         borderColor: "transparent",
-//         borderWidth: 0,
-//         borderRadius: 5
-//       }}
-//       containerStyle={{marginTop: 20}}
-//     />
-//   </View>
-// )

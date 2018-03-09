@@ -6,8 +6,8 @@ import DeckList from "./DeckList/index"
 import NewDeck from "./NewDeck/index"
 
 export const AppNavigator = StackNavigator({
-  Home: {screen: DeckList},
-  NewDeck: {screen: NewDeck}
+  Home: {screen: DeckList, navigationOptions: { header: null } },
+  NewDeck: {screen: NewDeck, navigationOptions: { header: null }}
 })
 
 class AppWithNavigationState extends Component {
