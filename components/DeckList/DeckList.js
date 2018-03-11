@@ -4,19 +4,22 @@ import PropTypes from "prop-types"
 import { Avatar, Text, Card, Button, List, ListItem, Badge, Input } from "react-native-elements"
 import { connect } from "react-redux"
 import styles from "./styles"
-import { receiveDecks  } from "../../actions"
 
-class DeckList extends Component {
-
+export default class DeckList extends Component {
   componentDidMount () {
+    this.props.initDecks()
+  }
+
+  componentWillUnmount () {
   }
 
   changeView = () => {
-    this.props.navigation.dispatch({ type: 'OPEN_NEWDECK_SCREEN' })
+    this.props.navigation.dispatch({type: "OPEN_NEWDECK_SCREEN"})
   }
 
-  render() {
+  render () {
     const {list} = this.props
+
     return (
       <View style={styles.container}>
         <View>
@@ -63,18 +66,3 @@ const Deck = ({title, quizNum = 0}) =>
       textStyle={{color: "orange"}}
     />
   </Card>
-
-
-const mapStateToProps = (state) => {
-  return {
-    list: state.decks.list,
-    // currentView: state.screens.currentView
-  }
-}
-
-
-const actions = {
-  receiveDecks,
-}
-
-export default connect(mapStateToProps, actions)(DeckList)

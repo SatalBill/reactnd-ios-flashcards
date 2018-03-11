@@ -1,33 +1,33 @@
-import { NavigationActions } from 'react-navigation'
-import { AppNavigator } from '../components/AppNavigator'
+import { NavigationActions } from "react-navigation"
+import { AppNavigator } from "../components/AppNavigator"
 
-const firstAction = AppNavigator.router.getActionForPathAndParams('Home')
+const firstAction = AppNavigator.router.getActionForPathAndParams("Home")
 const tempNavState = AppNavigator.router.getStateForAction(firstAction)
-// const secondAction = AppNavigator.router.getActionForPathAndParams('NewDeck')
-const initialNavState = AppNavigator.router.getStateForAction(
+// const secondAction = AppNavigator.router.getActionForPathAndParams("NewDeck")
+const INIT_NAV_STATE = AppNavigator.router.getStateForAction(
   firstAction,
   tempNavState
 )
 
 
-const nav = (state = initialNavState, action) => {
+const nav = (state = INIT_NAV_STATE, action) => {
   let nextState
   switch (action.type) {
-    case 'Home':
+    case "Home":
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.back(),
         state
       )
       break
-    case 'OPEN_NEWDECK_SCREEN':
+    case "OPEN_NEWDECK_SCREEN":
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({routeName: 'NewDeck'}),
+        NavigationActions.navigate({routeName: "NewDeck"}),
         state
       )
       break
-    case 'OPEN_HOME_SCREEN':
+    case "OPEN_HOME_SCREEN":
       nextState = AppNavigator.router.getStateForAction(
-        NavigationActions.navigate({routeName: 'Home'}),
+        NavigationActions.navigate({routeName: "Home"}),
         state
       )
       break

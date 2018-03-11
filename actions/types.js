@@ -1,3 +1,11 @@
+
+
 export const RECEIVE_DECKS = "RECEIVE_DECKS"
 export const RECEIVE_DECK = "RECEIVE_DECK"
-export const CHANGE_SCREEN = "CHANGE_SCREEN"
+export const CREATE_NEW_DECK = "CREATE_NEW_DECK"
+
+
+export const ADD_DECKS = "ADD_DECKS"
+export const DECKS_AVAILABLE = "DECKS_AVAILABLE"
+export const UPDATE_DECK = "UPDATE_DECKS"
+export const DELETE_DECK = "DELETE_DECKS"

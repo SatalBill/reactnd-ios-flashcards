@@ -19,6 +19,7 @@ class NewDeck extends Component {
     this.setState({title, _isFilled})
   }
 
+
   submit = () => {
     return this.state._isFilled ?
       this.props.navigation.dispatch({type: 'OPEN_HOME_SCREEN'}) : null
