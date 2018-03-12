@@ -1,6 +1,6 @@
-const SampleData = {
+export default {
   React:      {
-    id: 0,
+    id: '_w7mpufv9v',
     title:     "React",
     questions: [
       {
@@ -14,7 +14,7 @@ const SampleData = {
     ]
   },
   JavaScript: {
-    id: 1,
+    id: '_d8uxq6haj',
     title:     "JavaScript",
     questions: [
       {
@@ -25,4 +25,4 @@ const SampleData = {
   }
 }
 
-export default SampleData
+
