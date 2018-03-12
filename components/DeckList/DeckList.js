@@ -1,16 +1,23 @@
 import React, { Component } from "react"
-import { View } from "react-native"
+import { View, ScrollView } from "react-native"
 import PropTypes from "prop-types"
 import { Avatar, Text, Card, Button, List, ListItem, Badge, Input } from "react-native-elements"
-import { connect } from "react-redux"
 import styles from "./styles"
 
 export default class DeckList extends Component {
+  _isMounted = false
+
   componentDidMount () {
-    this.props.initDecks()
+    this._isMounted = true
+    this.fecthDecks()
   }
 
   componentWillUnmount () {
+    this._isMounted = false
+  }
+
+  fecthDecks = () => {
+    this._isMounted && this.props.fetchDecks()
   }
 
   changeView = () => {
@@ -19,7 +26,6 @@ export default class DeckList extends Component {
 
   render () {
     const {list} = this.props
-
     return (
       <View style={styles.container}>
         <View>
@@ -33,11 +39,12 @@ export default class DeckList extends Component {
             onPress={this.changeView}
             text="Create a new deck"
           />
-
+          <ScrollView>
           {list &&
           <Decks
             list={list}
           />}
+          </ScrollView>
         </View>
       </View>
     )
