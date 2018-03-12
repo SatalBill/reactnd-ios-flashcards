@@ -4,7 +4,7 @@ import { Button, Input } from "react-native-elements"
 import styles from "./styles"
 
 
-class NewDeck extends Component {
+export default class NewDeck extends Component {
 
   constructor (props) {
     super(props)
@@ -16,14 +16,19 @@ class NewDeck extends Component {
 
   onTitleChange = (title) => {
     const _isFilled = title.length > 0
-    this.setState({title, _isFilled})
+    this.setState({ title, _isFilled })
   }
-
 
   submit = () => {
-    return this.state._isFilled ?
-      this.props.navigation.dispatch({type: 'OPEN_HOME_SCREEN'}) : null
+    const { title } = this.state
+    if (this.state._isFilled) {
+      // save to db
+      this.props.addDeck({ title })
+      return this.props.navigation.dispatch({type: 'OPEN_HOME_SCREEN'})
+    }
   }
+
+
 
   render () {
     const buttonStyle = this.state.title.length === 0 ? styles.inactivedButton : styles.activedButton
@@ -47,5 +52,3 @@ class NewDeck extends Component {
     )
   }
 }
-
-export default NewDeck
