@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import DeckList from "../../components/DeckList"
-import { getDecks, initDecks } from "../../actions"
+import { getDecks, initDecks, receiveDeck } from "../../actions"
 
 const mapStateToProps = state => {
   return {
@@ -14,6 +14,9 @@ const mapDispatchToProps =  dispatch => {
     fetchDecks: () => {
       dispatch(initDecks())
       dispatch(getDecks())
+    },
+    receiveDeck: (id) => {
+      dispatch(receiveDeck(id))
     }
   }
 }

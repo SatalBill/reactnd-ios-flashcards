@@ -28,8 +28,6 @@ export default class NewDeck extends Component {
     }
   }
 
-
-
   render () {
     const buttonStyle = this.state.title.length === 0 ? styles.inactivedButton : styles.activedButton
 
