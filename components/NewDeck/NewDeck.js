@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import PropTypes from "prop-types"
 import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native"
 import { Button, Input } from "react-native-elements"
 import styles from "./styles"

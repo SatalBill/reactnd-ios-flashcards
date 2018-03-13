@@ -1,6 +1,6 @@
 import React, { Component } from "react"
-import { View, ScrollView, FlatView } from "react-native"
 import PropTypes from "prop-types"
+import { View, ScrollView, FlatView } from "react-native"
 import { Header, Text, Card, Button, List, ListItem, Badge, Input } from "react-native-elements"
 import styles from "./styles"
 
@@ -8,7 +8,6 @@ export default class DeckDetail extends Component {
 
   render () {
     const {currentDeck} = this.props
-
     const title = currentDeck? `${currentDeck.title}` : ' '
 
     return (
@@ -38,3 +37,15 @@ export default class DeckDetail extends Component {
     )
   }
 }
+
+// Typechecking With PropTypes
+const DeckShape = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  questions: PropTypes.oneOfType([null, PropTypes.object]).isRequired
+}
+
+DeckDetail.propTypes = {
+  currentDeck: PropTypes.shape(DeckShape)
+
+  }

@@ -1,6 +1,6 @@
 import React, { Component } from "react"
-import { View, ScrollView, FlatView } from "react-native"
 import PropTypes from "prop-types"
+import { View, ScrollView, FlatView } from "react-native"
 import { Avatar, Text, Card, Button, List, ListItem, Badge, Input } from "react-native-elements"
 import styles from "./styles"
 import { OPEN_NEW_DECK_SCREEN, OPEN_DECK_DETAIL_SCREEN } from "../../actions"
@@ -84,3 +84,25 @@ const Deck = ({title, quizNum = 0, onPress}) =>
     onPress={onPress}
   >
   </ListItem>
+
+// Typechecking With PropTypes
+const DeckShape = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  questions: PropTypes.oneOfType([null, PropTypes.object]).isRequired
+}
+
+DeckList.propTypes = {
+  list: PropTypes.objectOf(PropTypes.shape(DeckShape))
+}
+
+Decks.propTypes = {
+  list: PropTypes.object,
+  onPress: PropTypes.func
+}
+
+Deck.propTypes = {
+  title: PropTypes.string,
+  quizNum: PropTypes.number,
+  onPress: PropTypes.func
+}
