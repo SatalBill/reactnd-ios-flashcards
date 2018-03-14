@@ -9,17 +9,11 @@ const mapStateToProps = state => {
 }
 
 
-
 const mapDispatchToProps =  dispatch => {
   return {
     addDeck: (title) => {
       dispatch(addDeck(title))
-      // dispatch(getDecks())
     }
-
-    // addDeck: async (title) => {
-    //   await dispatch(addDeck(title))
-    //   return dispatch(getDecks())
   }
 }
 
