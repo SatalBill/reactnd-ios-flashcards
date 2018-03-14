@@ -13,7 +13,7 @@ export const DELETE_DECK = "DELETE_DECKS"
 
 // open deck
 export const RECEIVE_DECK = "RECEIVE_DECK"
-
+export const CLEAR_DECK = "CLEAR_DECK"
 
 
 // screen

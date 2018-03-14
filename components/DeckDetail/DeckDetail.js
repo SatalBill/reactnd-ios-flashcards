@@ -9,6 +9,9 @@ import { GoBackIcon } from "../NavIcons"
 export default class DeckDetail extends Component {
 
 
+  componentWillUnmount() {
+    this.props.clearDeck()
+  }
 
   render () {
     const {currentDeck} = this.props

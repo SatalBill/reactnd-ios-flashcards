@@ -1,4 +1,4 @@
-import { DECKS_AVAILABLE, INIT_DECKS, ADD_DECK, OPEN_DECK_DETAIL_SCREEN, OPEN_HOME_SCREEN, RECEIVE_DECK } from "./types"
+import { DECKS_AVAILABLE, INIT_DECKS, ADD_DECK, RECEIVE_DECK, CLEAR_DECK } from "./types"
 import SampleData from "../config/SampleData"
 import { AsyncStorage } from "react-native"
 import { ID } from "../utils/helper"
@@ -52,6 +52,12 @@ export const addDeck = (deck) => {
   }
 }
 
+
+export const clearDeck = () => {
+  return (dispatch) => {
+      dispatch({type: CLEAR_DECK})
+  }
+}
 
 
 export const receiveDeck = (searchKey) => {

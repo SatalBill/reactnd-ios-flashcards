@@ -1,4 +1,4 @@
-import { DECKS_AVAILABLE, ADD_DECK, RECEIVE_DECK } from "../actions"
+import { DECKS_AVAILABLE, ADD_DECK, RECEIVE_DECK, CLEAR_DECK } from "../actions"
 
 const INITIAL_STATE = {
   currentDeck: null,
@@ -25,12 +25,19 @@ const decks = (state = INITIAL_STATE, action) => {
         }
       }
 
+
+
     case RECEIVE_DECK:
       return {
         ...state,
         currentDeck
       }
 
+    case CLEAR_DECK:
+      return {
+        ...state,
+        currentDeck: null
+      }
     default:
       return state
   }
