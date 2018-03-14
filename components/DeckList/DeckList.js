@@ -21,10 +21,6 @@ export default class DeckList extends Component {
     this._isMounted && this.props.fetchDecks()
   }
 
-  openNewDeck = () => {
-    this.props.navigation.dispatch({type: OPEN_NEW_DECK_SCREEN})
-  }
-
   openDeckDetail = (searchKey) => {
     this.props.receiveDeck(searchKey)
     this.props.navigation.dispatch({type: OPEN_DECK_DETAIL_SCREEN})
@@ -43,7 +39,7 @@ export default class DeckList extends Component {
           />
           <Text h4>Sujin Lee</Text>
           <Button
-            onPress={this.openNewDeck}
+            onPress={this.props.openNewDeck}
             text="Create a new deck"
           />
 

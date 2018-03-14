@@ -1,2 +1,3 @@
-export * from "./pressActions"
+export * from "./DeckActions"
+export * from "./NavigationActions"
 export * from "./types"
