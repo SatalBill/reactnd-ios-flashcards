@@ -1,26 +1,11 @@
-import {
-
-  GO_TO_BACK,
-
-  DECKS_AVAILABLE, INIT_DECKS, ADD_DECK, OPEN_DECK_DETAIL_SCREEN, OPEN_HOME_SCREEN, RECEIVE_DECK } from "./types"
+import { DECKS_AVAILABLE, INIT_DECKS, ADD_DECK, OPEN_DECK_DETAIL_SCREEN, OPEN_HOME_SCREEN, RECEIVE_DECK } from "./types"
 import SampleData from "../config/SampleData"
 import { AsyncStorage } from "react-native"
 import { ID } from "../utils/helper"
 
 const DECK_STORAGE_KEY = "FlashCard:Deck"
 //
-// export const openDeckDetail = () => {
-//   return (dispatch) => {
-//     dispatch({type: OPEN_DECK_DETAIL_SCREEN})
-//   }
-// }
 
-
-export const goHome = () =>{
-  return (dispatch) => {
-      dispatch({type: OPEN_HOME_SCREEN})
-  }
-}
 
 export const getDecks = () => {
   return (dispatch) => {
@@ -79,7 +64,6 @@ export const receiveDeck = (searchKey) => {
       const currentDeck = Object.keys(decks).map(key =>
         decks[key].id === searchKey && decks[key]
       ).filter(e => e)[0]
-
       dispatch({type: RECEIVE_DECK, currentDeck})
     })
   }
