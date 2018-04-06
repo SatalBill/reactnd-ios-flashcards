@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import DeckDetail from "../../components/DeckDetail"
-import { clearDeck } from "../../actions"
+import { clearDeck, openNewCard } from "../../actions"
 
 const mapStateToProps = state => {
   return {
@@ -12,6 +12,9 @@ const mapDispatchToProps =  dispatch => {
   return {
     clearDeck: () => {
       dispatch(clearDeck())
+    },
+    openNewCard: () => {
+      dispatch(openNewCard())
     }
 
   }

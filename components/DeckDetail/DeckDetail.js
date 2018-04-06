@@ -30,7 +30,6 @@ export default class DeckDetail extends Component {
             text="ADD CARD"
             //loading
             onPress={this.props.openNewCard}
-
             textStyle={{fontWeight: "700"}}
             containerStyle={{marginTop: 20}}
           />
