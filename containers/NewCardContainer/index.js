@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
-import NewCard from "../../components/NewCard"
-import { getDecks, initDecks, receiveDeck } from "../../actions"
+import NewQuiz from "../../components/NewQuiz"
+import { getDecks, initDecks, receiveDeck, goToBack } from "../../actions"
 
 const mapStateToProps = state => {
   return {
@@ -11,18 +11,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps =  dispatch => {
   return {
-    fetchDecks: () => {
-      dispatch(initDecks())
-      dispatch(getDecks())
-    },
-    receiveDeck: (id) => {
-      dispatch(receiveDeck(id))
+    goToBack: () => {
+      dispatch(goToBack())
     }
   }
 }
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewCard)
+export default connect(mapStateToProps, mapDispatchToProps)(NewQuiz)
 
 

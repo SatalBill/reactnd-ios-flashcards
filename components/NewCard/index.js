@@ -1,4 +1,4 @@
-import NewCard from "./NewCard"
+import NewCard from "./NewQuiz"
 
 export default NewCard
 

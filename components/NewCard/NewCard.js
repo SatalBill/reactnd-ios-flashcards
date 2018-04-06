@@ -5,7 +5,7 @@ import { Header, Text, Card, Button, List, ListItem, Badge, Input } from "react-
 import styles from "./styles"
 import { GoBackIcon } from "../NavIcons"
 
-export default class NewCard extends Component {
+export default class NewQuiz extends Component {
 
   constructor (props) {
     super(props)
@@ -28,12 +28,11 @@ export default class NewCard extends Component {
   }
 
   submit = () => {
-    const {title} = this.state
-    const _isFilled = this.state._isFilledQuestion && this.state.__isFilledAnswer
+    const _isFilled = this.state._isFilledQuestion && this.state._isFilledAnswer
     if (_isFilled) {
       // save to db
-      this.props.addCard({title})
-      return this.props.navigation.dispatch({type: "OPEN_HOME_SCREEN"})
+      //this.props.addCardToDeck({question, answer })
+      return this.props.goToBack()
     }
   }
 
