@@ -66,7 +66,7 @@ const Decks = ({list, onPress}) =>
         <Deck
           key={i}
           title={list[k].title}
-          quizNum={list[k].questions.length}
+          quizNum={list[k].questions? list[k].questions.length : 0}
           onPress={() => onPress(list[k].id)}
         />
       )
@@ -85,7 +85,7 @@ const Deck = ({title, quizNum = 0, onPress}) =>
 const DeckShape = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string,
-  questions: PropTypes.oneOfType([null, PropTypes.object]).isRequired
+  questions: PropTypes.oneOfType([PropTypes.object]).isRequired
 }
 
 DeckList.propTypes = {
