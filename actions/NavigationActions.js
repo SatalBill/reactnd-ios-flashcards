@@ -1,7 +1,5 @@
 import { GO_TO_BACK, OPEN_HOME_SCREEN, OPEN_NEW_DECK_SCREEN, OPEN_DECK_DETAIL_SCREEN, OPEN_NEW_CARD_SCREEN  } from "./types"
 
-
-
 export const goToBack = () =>{
   return (dispatch) => {
     dispatch({type: GO_TO_BACK})
