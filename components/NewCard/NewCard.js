@@ -5,13 +5,13 @@ import { Header, Text, Card, Button, List, ListItem, Badge, Input } from "react-
 import styles from "./styles"
 import { GoBackIcon } from "../NavIcons"
 
-export default class NewQuiz extends Component {
+export default class NewCard extends Component {
 
   constructor (props) {
     super(props)
     this.state = {
-      question: "",
       answer: "",
+      question: "",
       _isFilledQuestion: false,
       _isFilledAnswer: false
     }
@@ -29,9 +29,10 @@ export default class NewQuiz extends Component {
 
   submit = () => {
     const _isFilled = this.state._isFilledQuestion && this.state._isFilledAnswer
+    const {question, answer} = this.state
+    const title = this.props.currentDeck.title
     if (_isFilled) {
-      // save to db
-      //this.props.addCardToDeck({question, answer })
+      this.props.addCardToDeck({answer, question, title})
       return this.props.goToBack()
     }
   }
@@ -41,10 +42,15 @@ export default class NewQuiz extends Component {
     const buttonStyle = this.state._isFilledQuestion && this.state._isFilledAnswer
       ? styles.activedButton : styles.inactivedButton
 
+    const {currentDeck} = this.props
+    const title = currentDeck ? `${currentDeck.title}` : " "
+
     return (
       <View>
         <Header
           leftComponent={<GoBackIcon/>}
+          centerComponent={{text: title, style: {color: "#fff"}}}
+
         />
         <View>
           <Input
