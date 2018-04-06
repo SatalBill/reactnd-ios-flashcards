@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import NewDeck from "../../components/NewDeck"
-import { getDecks, addDeck } from "../../actions"
+import { goToBack, addDeck } from "../../actions"
 
 const mapStateToProps = state => {
   return {
@@ -8,12 +8,16 @@ const mapStateToProps = state => {
   }
 }
 
-
-const mapDispatchToProps =  dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
     addDeck: (title) => {
       dispatch(addDeck(title))
+    },
+
+    goToBack: () => {
+      dispatch(goToBack())
     }
+
   }
 }
 

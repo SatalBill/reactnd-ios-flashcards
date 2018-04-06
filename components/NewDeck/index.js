@@ -1,5 +1,5 @@
-import NewCard from "./NewCard"
+import NewDeck from "./NewDeck"
 
-export default NewCard
+export default NewDeck
 
 
