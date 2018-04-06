@@ -10,6 +10,9 @@ export const UPDATE_DECK = "UPDATE_DECKS"
 export const DELETE_DECK = "DELETE_DECKS"
 
 
+// cards
+export const ADD_CARD_TO_DECK = "ADD_CARD_TO_DECK"
+
 
 // open deck
 export const RECEIVE_DECK = "RECEIVE_DECK"
