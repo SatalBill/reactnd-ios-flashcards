@@ -23,13 +23,15 @@ export default class DeckDetail extends Component {
 
           leftComponent={<GoBackIcon/>}
           centerComponent={{text: title, style: {color: "#fff"}}}
-          // rightComponent={{icon: "arrowleft", type: "font-awesome", ncolor: "#fff"}}
-        />
+        >
+
+
+        </Header>
         <View>
           <Button
-            text="ADD CARD"
+            text="ADD QUIZ"
             //loading
-            onPress={this.props.openNewCard}
+            onPress={this.props.openNewQuiz}
             textStyle={{fontWeight: "700"}}
             containerStyle={{marginTop: 20}}
           />
@@ -68,6 +70,9 @@ const QuizCards = ({list}) =>
       )
     }
   </ScrollView>
+
+
+//
 
 const Cardshape = {
   id: PropTypes.string.isRequired,

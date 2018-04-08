@@ -1,4 +1,4 @@
-import { DECKS_AVAILABLE, INIT_DECKS, ADD_DECK, RECEIVE_DECK, CLEAR_DECK, ADD_CARD_TO_DECK } from "./types"
+import { DECKS_AVAILABLE, INIT_DECKS, ADD_DECK, RECEIVE_DECK, CLEAR_DECK, ADD_QUIZ_TO_DECK } from "./types"
 import SampleData from "../config/SampleData"
 import { AsyncStorage } from "react-native"
 import { ID } from "../utils/helper"
@@ -52,8 +52,8 @@ export const addDeck = (deck) => {
   }
 }
 
-export const addCardToDeck = (content) => {
-  const newCard = {
+export const addQuizToDeck = (content) => {
+  const newQuiz = {
     question: content.question,
     answer: content.answer,
   }
@@ -64,10 +64,10 @@ export const addCardToDeck = (content) => {
         decks = JSON.parse(decks)
         decks[content.title].questions = [
           ...decks[content.title].questions,
-          newCard
+          newQuiz
         ]
         AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks), () =>
-          dispatch({type: ADD_CARD_TO_DECK, newCard})
+          dispatch({type: ADD_QUIZ_TO_DECK, newQuiz})
         )
       }
     }).done()

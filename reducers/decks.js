@@ -1,4 +1,4 @@
-import { DECKS_AVAILABLE, ADD_DECK, RECEIVE_DECK, CLEAR_DECK, ADD_CARD_TO_DECK } from "../actions"
+import { DECKS_AVAILABLE, ADD_DECK, RECEIVE_DECK, CLEAR_DECK, ADD_QUIZ_TO_DECK } from "../actions"
 
 const INITIAL_STATE = {
   currentDeck: null,
@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 }
 
 const decks = (state = INITIAL_STATE, action) => {
-  const {list, newDeck, newCard, currentDeck} = action
+  const {list, newDeck, newQuiz, currentDeck} = action
 
   switch (action.type) {
 
@@ -37,12 +37,12 @@ const decks = (state = INITIAL_STATE, action) => {
         currentDeck: null
       }
 
-    case ADD_CARD_TO_DECK:
+    case ADD_QUIZ_TO_DECK:
       const updateCurrentDeck =  {
         ...state.currentDeck,
           questions: [
           ...state.currentDeck.questions,
-          newCard
+            newQuiz
         ]
       }
 

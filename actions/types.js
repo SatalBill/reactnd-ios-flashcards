@@ -10,8 +10,8 @@ export const UPDATE_DECK = "UPDATE_DECKS"
 export const DELETE_DECK = "DELETE_DECKS"
 
 
-// cards
-export const ADD_CARD_TO_DECK = "ADD_CARD_TO_DECK"
+// quiz
+export const ADD_QUIZ_TO_DECK = "ADD_QUIZ_TO_DECK"
 
 
 // open deck
@@ -28,4 +28,4 @@ export const OPEN_DECK_DETAIL_SCREEN = "OPEN_DECK_DETAIL_SCREEN"
 
 export const OPEN_HOME_SCREEN = "OPEN_HOME_SCREEN"
 
-export const OPEN_NEW_CARD_SCREEN = "OPEN_NEW_CARD_SCREEN"
+export const OPEN_NEW_QUIZ_SCREEN = "OPEN_NEW_QUIZ_SCREEN"

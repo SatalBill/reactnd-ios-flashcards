@@ -32,7 +32,7 @@ export default class NewCard extends Component {
     const {question, answer} = this.state
     const title = this.props.currentDeck.title
     if (_isFilled) {
-      this.props.addCardToDeck({answer, question, title})
+      this.props.addQuizToDeck({answer, question, title})
       return this.props.goToBack()
     }
   }
@@ -56,10 +56,12 @@ export default class NewCard extends Component {
           <Input
             placeholder="Write Question"
             onChangeText={this.onQuestionChange}
+            autoFocus
           />
           <Input
             placeholder="Write Answer"
             onChangeText={this.onAnswerChange}
+            autoFocus
           />
           <Button
             text="SUBMIT"
