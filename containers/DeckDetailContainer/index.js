@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import DeckDetail from "../../components/DeckDetail"
-import { clearDeck, openNewQuiz } from "../../actions"
+import { clearDeck, openNewQuiz, openStartQuiz } from "../../actions"
 
 const mapStateToProps = state => {
   return {
@@ -15,8 +15,10 @@ const mapDispatchToProps =  dispatch => {
     },
     openNewQuiz: () => {
       dispatch(openNewQuiz())
+    },
+    openStartQuiz: () => {
+      dispatch(openStartQuiz())
     }
-
   }
 }
 
