@@ -42,6 +42,7 @@ const nav = (state = INIT_NAV_STATE, action) => {
         NavigationActions.navigate({routeName: "NewQuiz"}),
         state
       )
+      break
     case OPEN_START_QUIZ_SCREEN:
       nextState = AppNavigator.router.getStateForAction(
         NavigationActions.navigate({routeName: "StartQuiz"}),
