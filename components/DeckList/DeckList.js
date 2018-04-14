@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { View, ScrollView, FlatView } from "react-native"
-import { Avatar, Text, Card, Button, List, ListItem, Badge, Input } from "react-native-elements"
+import { View, ScrollView } from "react-native"
+import { Avatar, Text, Button, List, ListItem, Divider } from "react-native-elements"
 import styles from "./styles"
-import { OPEN_NEW_DECK_SCREEN, OPEN_DECK_DETAIL_SCREEN } from "../../actions"
+import { OPEN_DECK_DETAIL_SCREEN } from "../../actions"
 
 export default class DeckList extends Component {
   _isMounted = false
@@ -28,6 +28,7 @@ export default class DeckList extends Component {
 
   render () {
     const {list} = this.props
+
     return (
       <View style={styles.container}>
         <View style={styles.profile}>
@@ -40,18 +41,20 @@ export default class DeckList extends Component {
           <Text h4>Sujin Lee</Text>
           <Button
             onPress={this.props.openNewDeck}
-            text="Create a new deck"
+            title="Create a new deck"
           />
-
+          <Divider style={{backgroundColor: "blue"}}/>
         </View>
 
         <View style={styles.decklist}>
           <ScrollView>
             {list &&
+
             <Decks
               list={list}
               onPress={this.openDeckDetail}
-            />}
+            />
+            }
           </ScrollView>
         </View>
       </View>
@@ -59,25 +62,29 @@ export default class DeckList extends Component {
   }
 }
 
+const keyExtractor = (item, index) => index
+
 const Decks = ({list, onPress}) =>
-  <List>
+  <View>
     {
       Object.keys(list).map((k, i) =>
         <Deck
           key={i}
           title={list[k].title}
-          quizNum={list[k].questions? list[k].questions.length : 0}
+          quizNum={list[k].questions ? list[k].questions.length : 0}
           onPress={() => onPress(list[k].id)}
         />
       )
     }
-  </List>
+  </View>
 
 const Deck = ({title, quizNum = 0, onPress}) =>
   <ListItem
     title={title}
     badge={{value: quizNum}}
     onPress={onPress}
+    chevron
+    topDivider={true}
   >
   </ListItem>
 
