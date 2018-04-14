@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { View, ScrollView, TouchableOpacity } from "react-native"
-import { Header, Text, Card, Button, List, ListItem, Badge, Input } from "react-native-elements"
+import { Header, Text, Card, Button, Badge, Input } from "react-native-elements"
 import styles from "./styles"
 
 import { GoBackIcon } from "../NavIcons"
@@ -14,6 +14,8 @@ export default class DeckDetail extends Component {
 
   render () {
     const {currentDeck} = this.props
+    const quizNum = currentDeck? currentDeck.questions.length: 0
+
     const title = currentDeck ? `${currentDeck.title}` : " "
 
     return (
@@ -22,7 +24,7 @@ export default class DeckDetail extends Component {
         <Header
 
           leftComponent={<GoBackIcon/>}
-          centerComponent={{text: title, style: {color: "#fff"}}}
+          centerComponent={<DeckTitleName title={title} quizNum={quizNum}/>}
         >
 
 
@@ -38,7 +40,7 @@ export default class DeckDetail extends Component {
           <Button
             text="START QUIZ"
             //loading
-            //loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
+            onPress={this.props.openStartQuiz}
             textStyle={{fontWeight: "700"}}
             containerStyle={{marginTop: 20}}
           />
@@ -56,6 +58,13 @@ export default class DeckDetail extends Component {
   }
 }
 
+const DeckTitleName = ({title, quizNum = 0}) =>
+
+    <Badge containerStyle={{backgroundColor: "violet"}}>
+
+      <Text>{quizNum}</Text>
+    </Badge>
+
 const QuizCards = ({list}) =>
   <ScrollView>
     {
@@ -70,9 +79,6 @@ const QuizCards = ({list}) =>
       )
     }
   </ScrollView>
-
-
-//
 
 const Cardshape = {
   id: PropTypes.string.isRequired,
