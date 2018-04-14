@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native"
 import { Header, Button, Input } from "react-native-elements"
-import { GoBackIcon } from "../NavIcons"
+import { Icon } from "react-native-elements"
 
 import CardStack, { Card } from "react-native-card-stack-swiper"
 import MainDeckHeader from "../MainDeckHeader"
@@ -22,8 +22,11 @@ export default class StartQuiz extends Component {
         <CardStack
           style={styles.content}
 
-          renderNoMoreCards={() => <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>No more cards
-            :(</Text>}
+          renderNoMoreCards={() =>
+            <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
+              No more cards:(
+            </Text>
+          }
           ref={swiper => {
             this.swiper = swiper
           }}
@@ -31,12 +34,20 @@ export default class StartQuiz extends Component {
           onSwiped={() => console.log("onSwiped")}
           onSwipedLeft={() => console.log("onSwipedLeft")}
         >
-          <Card style={[styles.card, styles.card1]}><Text style={styles.label}>A</Text></Card>
-          <Card style={[styles.card, styles.card2]} onSwipedLeft={() => alert("onSwipedLeft")}><Text
-            style={styles.label}>B</Text></Card>
-          <Card style={[styles.card, styles.card1]}><Text style={styles.label}>C</Text></Card>
-          <Card style={[styles.card, styles.card2]}><Text style={styles.label}>D</Text></Card>
-          <Card style={[styles.card, styles.card1]}><Text style={styles.label}>E</Text></Card>
+
+          {currentDeck.questions.length > 0 && currentDeck.questions.map((card, i) =>
+            <Card
+              key={`quiz-${i}`}
+              style={[styles.card]}
+              onSwipedLeft={() => console.log("onSwipedLeft")}
+            >
+              <Text
+                style={styles.label}>{card.question}
+              </Text>
+
+            </Card>
+          )
+          }
 
         </CardStack>
 
@@ -46,24 +57,30 @@ export default class StartQuiz extends Component {
             <TouchableOpacity style={[styles.button, styles.red]} onPress={() => {
               this.swiper.swipeLeft()
             }}>
-              <Text>Unlike</Text>
-
-              {/*<Image source={require("./assets/red.png")} resizeMode={"contain"} style={{height: 62, width: 62}}/>*/}
+              <Icon
+                size={30}
+                name="x"
+                type="feather"
+                color="#fd267d"/>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, styles.orange]} onPress={() => {
               this.swiper.goBackFromLeft()
             }}>
-              <Text>Refresh</Text>
+              <Icon
+                size={18}
+                name="rotate-ccw"
+                type="feather"
+                color="#FEB12C"/>
 
-              {/*<Image source={require("./assets/back.png")} resizeMode={"contain"}*/}
-              {/*style={{height: 32, width: 32, borderRadius: 5}}/>*/}
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, styles.green]} onPress={() => {
               this.swiper.swipeRight()
             }}>
-              <Text>like</Text>
-
-              {/*<Image source={require("./assets/green.png")} resizeMode={"contain"} style={{height: 62, width: 62}}/>*/}
+              <Icon
+                size={30}
+                name="check"
+                type="feather"
+                color="#01df8a"/>
             </TouchableOpacity>
           </View>
 
@@ -83,10 +100,12 @@ const styles = StyleSheet.create({
     flex: 5,
     alignItems: "center",
     justifyContent: "center",
+
   },
   card: {
     width: 320,
     height: 470,
+    padding: 14,
     backgroundColor: "#FE474C",
     borderRadius: 5,
     shadowColor: "rgba(0,0,0,0.5)",
@@ -95,6 +114,8 @@ const styles = StyleSheet.create({
       height: 1
     },
     shadowOpacity: 0.5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   card1: {
     backgroundColor: "#FE474C",
@@ -103,12 +124,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#FEB12C",
   },
   label: {
-    lineHeight: 400,
     textAlign: "center",
-    fontSize: 55,
-    fontFamily: "System",
-    color: "#ffffff",
-    backgroundColor: "transparent",
+    fontSize: 30,
+
+    // fontFamily: "System",
+
+    color: "#fff",
+    backgroundColor: "transparent"
   },
   footer: {
     flex: 1,
