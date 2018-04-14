@@ -3,10 +3,11 @@ import React, { Component } from "react"
 import { View, Text, Header } from "react-native-elements"
 import { GoBackIcon } from "../NavIcons"
 import styles from "./styles"
+import { deviceHeight } from "../Dimensions"
 
 const MainDeckHeader = ({title}) =>
   <Header
-    // backgroundColor="#fff"
+    backgroundColor="#fff"
     leftComponent={<GoBackIcon/>}
     centerComponent={<DeckTitleName title={title}/>}
     innerContainerStyles={styles.innerContainer}
@@ -14,6 +15,13 @@ const MainDeckHeader = ({title}) =>
   />
 
 const DeckTitleName = ({title}) =>
-  <Text>{title}</Text>
+    <Text style={
+      { lineHeight: 20,
+        fontSize: 20,
+      }
+    }
+
+
+    >{title}</Text>
 
 export default MainDeckHeader

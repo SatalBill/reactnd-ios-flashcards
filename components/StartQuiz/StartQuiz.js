@@ -44,7 +44,6 @@ export default class StartQuiz extends Component {
               <Text
                 style={styles.label}>{card.question}
               </Text>
-
             </Card>
           )
           }
@@ -114,8 +113,8 @@ const styles = StyleSheet.create({
       height: 1
     },
     shadowOpacity: 0.5,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   card1: {
     backgroundColor: "#FE474C",

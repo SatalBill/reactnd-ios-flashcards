@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native"
+import { deviceHeight } from "../Dimensions"
 
 const styles = StyleSheet.create({
   innerContainer: {
@@ -6,34 +7,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-    // backgroundColor: "#fff",
-
+    borderBottomWidth: 0,
   },
 
   outerContainer: {
-    borderBottomColor: '#f2f2f2',
     borderBottomWidth: 1,
-    // backgroundColor: "#fff",
-
-
-  },
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignSelf: 'stretch',
-  },
-  profile: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  decklist: {
-    flex: 2,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignSelf: 'stretch',
-  },
+    height: deviceHeight / 10,
+    marginBottom: deviceHeight / 80,
+    borderBottomColor: "#fff"
+  }
 })
 
 export default styles

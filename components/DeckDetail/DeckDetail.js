@@ -2,14 +2,9 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { Text, View, ScrollView, TouchableOpacity } from "react-native"
 import { Card, Button } from "react-native-elements"
-
 import MainDeckHeader from "../MainDeckHeader"
 import styles from "./styles"
-import { Dimensions } from "react-native"
-
-let deviceWidth = Dimensions.get("window").width
-let deviceHeight = Dimensions.get("window").height
-
+import { deviceWidth } from "../Dimensions"
 
 export default class DeckDetail extends Component {
 
@@ -82,7 +77,9 @@ const QuizCards = ({list, quizNum = 0}) =>
           title={list[k].question}
 
         >
-          <Text>{list[k].answer}</Text>
+          <View>
+            <Text>{list[k].answer}</Text>
+          </View>
         </Card>
       )
     }
