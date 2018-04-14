@@ -45,12 +45,12 @@ export default class NewDeck extends Component {
 
   render () {
     const {title, _isError} = this.state
-    const buttonStyle = title.length === 0 ? styles.inactivedButton : styles.activedButton
+    const buttonStyle = title.length === 0 ? styles.inActivedButton : styles.activedButton
 
     return (
-      <View>
+      <View style={styles.container}>
         <MainDeckHeader/>
-        <View>
+        <View style={styles.content}>
           <Input
             placeholder="Write Deck Title"
             onChangeText={this.onTitleChange}
@@ -76,5 +76,5 @@ export default class NewDeck extends Component {
 
 const ErrorMessage = ({error}) =>
   <Text>
-    {error? "Deck already exists" : ""}
+    {error ? "Deck already exists" : ""}
   </Text>
