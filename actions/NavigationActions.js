@@ -1,4 +1,4 @@
-import { GO_TO_BACK, OPEN_HOME_SCREEN, OPEN_NEW_DECK_SCREEN, OPEN_DECK_DETAIL_SCREEN, OPEN_NEW_QUIZ_SCREEN  } from "./types"
+import { GO_TO_BACK, OPEN_HOME_SCREEN, OPEN_NEW_DECK_SCREEN, OPEN_DECK_DETAIL_SCREEN, OPEN_NEW_QUIZ_SCREEN, OPEN_START_QUIZ_SCREEN  } from "./types"
 
 export const goToBack = () =>{
   return (dispatch) => {
@@ -29,6 +29,12 @@ export const openDeckDetail = () => {
 export const openNewQuiz = () => {
   return (dispatch) => {
     dispatch({type: OPEN_NEW_QUIZ_SCREEN})
+  }
+}
+
+export const openStartQuiz = () => {
+  return (dispatch) => {
+    dispatch({type: OPEN_START_QUIZ_SCREEN})
   }
 }
 
