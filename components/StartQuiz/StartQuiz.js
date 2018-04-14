@@ -1,18 +1,22 @@
 import React, { Component } from "react"
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-} from "react-native"
+import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native"
+import { Header, Button, Input } from "react-native-elements"
+import { GoBackIcon } from "../NavIcons"
 
 import CardStack, { Card } from "react-native-card-stack-swiper"
+import MainDeckHeader from "../MainDeckHeader"
 
 export default class StartQuiz extends Component {
   render () {
+    const {currentDeck} = this.props
+    const title = currentDeck ? `${currentDeck.title}` : " "
     return (
       <View style={{flex: 1}}>
+
+        <MainDeckHeader
+          title={title}
+
+        />
 
 
         <CardStack
@@ -52,7 +56,7 @@ export default class StartQuiz extends Component {
               <Text>Refresh</Text>
 
               {/*<Image source={require("./assets/back.png")} resizeMode={"contain"}*/}
-                     {/*style={{height: 32, width: 32, borderRadius: 5}}/>*/}
+              {/*style={{height: 32, width: 32, borderRadius: 5}}/>*/}
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, styles.green]} onPress={() => {
               this.swiper.swipeRight()

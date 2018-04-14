@@ -1,10 +1,15 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { View, ScrollView, TouchableOpacity } from "react-native"
-import { Header, Text, Card, Button, Badge, Input } from "react-native-elements"
-import styles from "./styles"
+import { Text, View, ScrollView, TouchableOpacity } from "react-native"
+import { Card, Button } from "react-native-elements"
 
-import { GoBackIcon } from "../NavIcons"
+import MainDeckHeader from "../MainDeckHeader"
+import styles from "./styles"
+import { Dimensions } from "react-native"
+
+let deviceWidth = Dimensions.get("window").width
+let deviceHeight = Dimensions.get("window").height
+
 
 export default class DeckDetail extends Component {
 
@@ -14,59 +19,62 @@ export default class DeckDetail extends Component {
 
   render () {
     const {currentDeck} = this.props
-    const quizNum = currentDeck? currentDeck.questions.length: 0
+    const quizNum = currentDeck ? currentDeck.questions.length : 0
 
     const title = currentDeck ? `${currentDeck.title}` : " "
 
     return (
       <View style={styles.container}>
+        <MainDeckHeader
+          title={title}
+        />
 
-        <Header
-
-          leftComponent={<GoBackIcon/>}
-          centerComponent={<DeckTitleName title={title} quizNum={quizNum}/>}
-        >
-
-
-        </Header>
-        <View>
-          <Button
-            text="ADD QUIZ"
-            //loading
+        <View style={{flexDirection: "row"}}>
+          <QuizButton
+            title="ADD CARD"
             onPress={this.props.openNewQuiz}
-            textStyle={{fontWeight: "700"}}
-            containerStyle={{marginTop: 20}}
           />
-          <Button
-            text="START QUIZ"
+          <QuizButton
+            title="START QUIZ"
             //loading
             onPress={this.props.openStartQuiz}
-            textStyle={{fontWeight: "700"}}
-            containerStyle={{marginTop: 20}}
+
           />
         </View>
         {currentDeck &&
         <QuizCards
           list={currentDeck.questions}
+          quizNum={quizNum}
           //onPress={this.openDeckDetail}
         />
         }
-
-
       </View>
     )
   }
 }
 
-const DeckTitleName = ({title, quizNum = 0}) =>
+const QuizButton = ({title, onPress}) =>
+  <Button
+    title={title}
+    //loading
+    onPress={onPress}
+    buttonStyle={{
+      backgroundColor: "rgba(92, 99,216, 1)",
+      width: deviceWidth / 2,
+      borderWidth: 0,
+      borderRadius: 0
+    }}
+  />
 
-    <Badge containerStyle={{backgroundColor: "violet"}}>
+const DeckTitleName = ({title}) =>
+  <View>
+    <Text>{title}</Text>
+  </View>
 
-      <Text>{quizNum}</Text>
-    </Badge>
-
-const QuizCards = ({list}) =>
+const QuizCards = ({list, quizNum = 0}) =>
   <ScrollView>
+    <Text>{quizNum} Cards</Text>
+
     {
       Object.keys(list).map((k, i) =>
         <Card

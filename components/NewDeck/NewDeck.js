@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native"
 import { Text, Header, Button, Input } from "react-native-elements"
+import MainDeckHeader from "../MainDeckHeader"
 import styles from "./styles"
 import { GoBackIcon } from "../NavIcons"
 
@@ -45,17 +46,12 @@ export default class NewDeck extends Component {
   render () {
     const {title, _isError} = this.state
     const buttonStyle = title.length === 0 ? styles.inactivedButton : styles.activedButton
-    //const errorMsg = _isError ? "Already created" : ""
 
-    // const errorMessage = this.state
     return (
       <View>
-        <Header
-          leftComponent={<GoBackIcon/>}
-        />
+        <MainDeckHeader/>
         <View>
           <Input
-
             placeholder="Write Deck Title"
             onChangeText={this.onTitleChange}
             errorStyle={{color: "red"}}
@@ -64,10 +60,10 @@ export default class NewDeck extends Component {
             error={_isError}
           />
           <Button
-            text="SUBMIT"
+            title="SUBMIT"
             //loading
             //loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
-            textStyle={{fontWeight: "700"}}
+            titleStyle={{fontWeight: "700"}}
             buttonStyle={buttonStyle}
             containerStyle={{marginTop: 20}}
             onPress={this.submit}
@@ -80,5 +76,5 @@ export default class NewDeck extends Component {
 
 const ErrorMessage = ({error}) =>
   <Text>
-    {error? "Already created" : ""}
+    {error? "Deck already exists" : ""}
   </Text>
