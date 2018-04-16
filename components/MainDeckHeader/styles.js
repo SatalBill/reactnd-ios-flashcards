@@ -8,13 +8,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     borderBottomWidth: 0,
+    backgroundColor: "#fff"
   },
 
   outerContainer: {
-    borderBottomWidth: 1,
     height: deviceHeight / 10,
-    marginBottom: deviceHeight / 80,
-    borderBottomColor: "#fff"
+    marginBottom: deviceHeight / 90,
+    backgroundColor: "#fff",
+    borderBottomColor: "#fff",
   }
 })
 
