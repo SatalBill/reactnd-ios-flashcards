@@ -1,10 +1,17 @@
 import { connect } from "react-redux"
 import StartQuiz from "../../components/StartQuiz"
-import { clearQuiz, startQuiz, goToBack } from "../../actions"
+import { clearQuiz, startQuiz, getRightAnswer, getWrongAnswer, goToBack } from "../../actions"
 
 const mapStateToProps = state => {
   return {
-    currentDeck: state.decks.currentDeck,
+    quiz: {
+      title: state.decks.currentDeck.title,
+      questions: state.decks.currentDeck.questions,
+      score: state.quiz.score,
+      total: state.quiz.total,
+      currentIndex: state.quiz.currentIndex,
+      isShow: state.quiz.showQuiz
+    }
   }
 }
 
@@ -16,6 +23,14 @@ const mapDispatchToProps =  dispatch => {
 
     startQuiz:({showQuiz, total}) => {
       dispatch(startQuiz({showQuiz, total}))
+    },
+
+    getWrongAnswer: () =>{
+      dispatch(getWrongAnswer())
+    },
+
+    getRightAnswer: () =>{
+      dispatch(getRightAnswer())
     },
 
     goToBack: () => {
