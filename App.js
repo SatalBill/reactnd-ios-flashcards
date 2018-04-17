@@ -1,7 +1,6 @@
 import React, { Component } from "react"
-import Store from "./config/store"
 import { Provider } from "react-redux"
-
+import Store from "./config/store"
 import AppWithNavigationStateContainer from './containers/AppWithNavigationStateContainer'
 
 export default class App extends Component {
@@ -10,7 +9,6 @@ export default class App extends Component {
     return (
       <Provider store={Store}>
         <AppWithNavigationStateContainer />
-
       </Provider>
     )
   }

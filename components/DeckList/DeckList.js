@@ -90,22 +90,22 @@ const Deck = ({title, quizNum = 0, onPress}) =>
 
 // Typechecking With PropTypes
 const DeckShape = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string,
-  questions: PropTypes.oneOfType([PropTypes.object]).isRequired
+  // id: PropTypes.string.isRequired,
+  // title: PropTypes.string,
+  // questions: PropTypes.oneOfType([PropTypes.object]).isRequired
 }
 
 DeckList.propTypes = {
-  list: PropTypes.objectOf(PropTypes.shape(DeckShape))
+  // list: PropTypes.objectOf(PropTypes.shape(DeckShape))
 }
 
 Decks.propTypes = {
-  list: PropTypes.object,
-  onPress: PropTypes.func
+  // list: PropTypes.object,
+  // onPress: PropTypes.func
 }
 
 Deck.propTypes = {
-  title: PropTypes.string,
-  quizNum: PropTypes.number,
-  onPress: PropTypes.func
+  // title: PropTypes.string,
+  // quizNum: PropTypes.number,
+  // onPress: PropTypes.func
 }

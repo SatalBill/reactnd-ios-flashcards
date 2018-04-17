@@ -5,15 +5,16 @@ import { connect } from "react-redux"
 
 import { goToBack } from "../../actions"
 
-const GoBackIcon = (props) =>
-  <TouchableOpacity onPress={props.goToBack}>
-    <Icon
-      size={23}
-      name="arrow-left"
-      type="feather"
-      color="#fff"/>
-  </TouchableOpacity>
-
+const GoBackIcon = (props) => {
+  return (
+    <TouchableOpacity onPress={props.goToBack}>
+      <Icon
+        size={23}
+        name="arrow-left"
+        type="feather"/>
+    </TouchableOpacity>
+  )
+}
 const mapStateToProps = state => ({
   nav: state.nav,
   navigation: state.navigation

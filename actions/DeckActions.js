@@ -14,7 +14,6 @@ export const getDecks = () => {
 }
 
 export const initDecks = () => {
-
   return (dispatch) => {
     //AsyncStorage.clear()
     AsyncStorage.getItem(DECK_STORAGE_KEY, (err, decks) => {
@@ -52,6 +51,26 @@ export const addDeck = (deck) => {
   }
 }
 
+export const clearDeck = () => {
+  return (dispatch) => {
+    dispatch({type: CLEAR_DECK})
+  }
+}
+
+export const receiveDeck = (searchKey) => {
+  return (dispatch) => {
+    AsyncStorage.getItem(DECK_STORAGE_KEY, (err, decks) => {
+      decks = JSON.parse(decks)
+      // get object matching with searchKey
+      const currentDeck = Object.keys(decks).map(key =>
+        decks[key].id === searchKey && decks[key]
+      ).filter(e => e)[0]
+      dispatch({type: RECEIVE_DECK, currentDeck})
+    })
+  }
+}
+
+// add new quiz
 export const addQuizToDeck = (content) => {
   const newQuiz = {
     question: content.question,
@@ -73,27 +92,6 @@ export const addQuizToDeck = (content) => {
     }).done()
   }
 }
-
-export const clearDeck = () => {
-  return (dispatch) => {
-    dispatch({type: CLEAR_DECK})
-  }
-}
-
-export const receiveDeck = (searchKey) => {
-  return (dispatch) => {
-    AsyncStorage.getItem(DECK_STORAGE_KEY, (err, decks) => {
-      decks = JSON.parse(decks)
-      // get object matching with searchKey
-      const currentDeck = Object.keys(decks).map(key =>
-        decks[key].id === searchKey && decks[key]
-      ).filter(e => e)[0]
-      dispatch({type: RECEIVE_DECK, currentDeck})
-    })
-  }
-}
-
-// add new quiz
 
 // delete new quiz
 

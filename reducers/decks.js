@@ -38,18 +38,18 @@ const decks = (state = INITIAL_STATE, action) => {
       }
 
     case ADD_QUIZ_TO_DECK:
-      const updateCurrentDeck =  {
+      const updateCurrentDeck = {
         ...state.currentDeck,
-          questions: [
+        questions: [
           ...state.currentDeck.questions,
-            newQuiz
+          newQuiz
         ]
       }
 
       return {
         list: {
           ...state.list,
-          [state.currentDeck.title] : updateCurrentDeck
+          [state.currentDeck.title]: updateCurrentDeck
         },
         currentDeck: updateCurrentDeck
       }

@@ -1,9 +1,9 @@
 import { StackNavigator } from "react-navigation"
-import DeckListContainer from "../containers/DeckListContainer"
-import NewDeckContainer from "../containers/NewDeckContainer"
-import DeckDetailContainer from "../containers/DeckDetailContainer"
-import NewQuizContainer from "../containers/NewQuizContainer"
-import StartQuizContainer from "../containers/StartQuizContainer"
+import DeckListContainer from "../../containers/DeckListContainer/index"
+import NewDeckContainer from "../../containers/NewDeckContainer/index"
+import DeckDetailContainer from "../../containers/DeckDetailContainer/index"
+import NewQuizContainer from "../../containers/NewQuizContainer/index"
+import StartQuizContainer from "../../containers/StartQuizContainer/index"
 
 
 export default StackNavigator({
