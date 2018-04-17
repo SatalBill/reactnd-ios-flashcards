@@ -1,66 +1,63 @@
 import React, { Component } from "react"
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native"
-import { Header, Button, Input } from "react-native-elements"
 import { Icon } from "react-native-elements"
 import CardStack, { Card } from "react-native-card-stack-swiper"
 import MainDeckHeader from "../MainDeckHeader"
 import styles from "./styles"
 
-
 export default class StartQuiz extends Component {
 
-
   componentDidMount () {
-    const quizNum = this.props.currentDeck.questions.length
+    const quizNum = this.props.quiz.questions.length
     this.props.startQuiz({showQuiz: true, total: quizNum})
   }
+
   componentWillUnmount () {
     this.props.clearQuiz()
   }
 
+  swipeRightAnswer = () => {
+    this.props.getRightAnswer()
+  }
+
+  swipeWrongAnswer = () => {
+    this.props.getWrongAnswer()
+  }
+
   render () {
-    const {currentDeck} = this.props
-    const title = currentDeck ? `${currentDeck.title}` : " "
+    const {quiz} = this.props
+    const title = quiz ? `${quiz.title}` : " "
     return (
       <View style={{flex: 1}}>
-
         <MainDeckHeader
           title={title}
-
         />
-
-
         <CardStack
           style={styles.content}
-
           renderNoMoreCards={() =>
             <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
-              No more cards:(
+               No more cards:(
             </Text>
           }
           ref={swiper => {
             this.swiper = swiper
           }}
-
-          onSwiped={() => console.log("onSwiped")}
-          onSwipedLeft={() => console.log("onSwipedLeft")}
+          onSwiped={this.swipeRightAnswer}
+          onSwipedLeft={this.swipeWrongAnswer}
         >
 
-          {currentDeck.questions.length > 0 && currentDeck.questions.map((card, i) =>
+          {quiz.questions.length > 0 && quiz.questions.map((card, i) =>
             <Card
               key={`quiz-${i}`}
               style={[styles.card]}
-              onSwipedLeft={() => console.log("onSwipedLeft")}
+              onSwipedLeft={this.swipeWrongAnswer}
             >
               <Text
                 style={styles.label}>{card.question}
               </Text>
             </Card>
-          )
-          }
-
+          )}
         </CardStack>
-
 
         <View style={styles.footer}>
           <View style={styles.buttonContainer}>
@@ -81,7 +78,6 @@ export default class StartQuiz extends Component {
                 name="rotate-ccw"
                 type="feather"
                 color="#FEB12C"/>
-
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, styles.green]} onPress={() => {
               this.swiper.swipeRight()
@@ -93,7 +89,6 @@ export default class StartQuiz extends Component {
                 color="#01df8a"/>
             </TouchableOpacity>
           </View>
-
         </View>
       </View>
     )
