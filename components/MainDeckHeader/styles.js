@@ -1,21 +1,26 @@
 import { StyleSheet } from "react-native"
 import { deviceHeight } from "../Dimensions"
+import { StatusBar } from "react-native"
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 19,
+  },
   innerContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    borderBottomWidth: 0,
-    backgroundColor: "#fff"
+    // flex: 1,
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
+    // alignItems: 'flex-end',
+    // borderBottomWidth: 0,
+    // backgroundColor: "#bababa",
+
   },
 
   outerContainer: {
-    height: deviceHeight / 10,
-    marginBottom: deviceHeight / 90,
     backgroundColor: "#fff",
     borderBottomColor: "#fff",
+    marginTop: StatusBar.currentHeight
+
   }
 })
 
