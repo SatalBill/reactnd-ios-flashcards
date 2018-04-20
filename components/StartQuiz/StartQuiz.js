@@ -17,19 +17,71 @@ export default class StartQuiz extends Component {
     this.props.clearQuiz()
   }
 
+  getGradeMessage = (score, total) => {
+    const percentage = (score / total) * 100
+    const message = {
+      perfect: "perfect",
+      excellent: "excellent",
+      good: "good",
+      fair: "fair",
+      poor: "poor",
+      bad: "bad"
+    }
+
+    let result = ""
+    switch (percentage) {
+      case 100: {
+        result = message.perfect
+        break
+      }
+      case 80: {
+        result = message.excellent
+        break
+      }
+      case 60: {
+        result = message.good
+        break
+      }
+
+      case 40: {
+        result = message.fair
+        break
+      }
+
+      case 20: {
+        result = message.poor
+        break
+      }
+
+      case 0: {
+        result = message.bad
+        break
+      }
+
+      default:
+        return
+    }
+    return result
+  }
+
   render () {
     const {quiz} = this.props
     const title = quiz ? `${quiz.title}` : " "
-    const scoreStatue = `${quiz.score}/${quiz.total}`
+    const scoreStatus = `${quiz.score}/${quiz.total}`
+
+    const gradeMessage = this.getGradeMessage(quiz.score, quiz.total)
 
     return (
       <View style={{flex: 1}}>
         <MainDeckHeader
           title={title}
         />
+
+        {!quiz._isFinish &&
         <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
-          {scoreStatue}
+          {scoreStatus}
         </Text>
+        }
 
         <CardStack
           style={styles.content}
@@ -40,15 +92,17 @@ export default class StartQuiz extends Component {
             <View>
               {quiz._isFinish ? <View>
                   <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
-                    {scoreStatue}
+                    {scoreStatus}
                   </Text>
-                  <TouchableOpacity
-                    style={[styles.button, styles.orange]}
-                    onPress={() => {
-                      this.swiper.goBackFromTop()
-                    }}>
-
-                  </TouchableOpacity>
+                  <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
+                    {gradeMessage}
+                  </Text>
+                  {/*<TouchableOpacity*/}
+                  {/*style={[styles.button, styles.orange]}*/}
+                  {/*onPress={() => {*/}
+                  {/*this.swiper.goBackFromTop()*/}
+                  {/*}}>*/}
+                  {/*</TouchableOpacity>*/}
                 </View>
                 : <View>
                   <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
@@ -69,11 +123,8 @@ export default class StartQuiz extends Component {
           onSwipedLeft={this.props.getWrongAnswer}
         >
           {quiz.questions.length > 0 && quiz.questions.map((card, i) =>
-
-            <Card>
+            <Card key={`quiz-${i}`}>
               <CardFlip
-
-                key={`quiz-${i}`}
                 style={[styles.card]} ref={(card) => this.card = card}>
                 <TouchableOpacity activeOpacity={1} style={[styles.card, styles.card1]}
                                   onPress={() => this.card.flip()}><Text
@@ -85,6 +136,7 @@ export default class StartQuiz extends Component {
             </Card>
           )}
         </CardStack>
+
 
         <View style={styles.footer}>
           <View style={styles.buttonContainer}>
@@ -112,4 +164,5 @@ export default class StartQuiz extends Component {
     )
   }
 }
+
 
