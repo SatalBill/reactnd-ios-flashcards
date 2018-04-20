@@ -1,36 +1,44 @@
-import { GET_RIGHT_ANSWER, GET_WRONG_ANSWER, START_QUIZ_AVAILABLE, INIT_QUIZ } from "../actions"
+import { GET_RIGHT_ANSWER, GET_WRONG_ANSWER, START_QUIZ_AVAILABLE, INIT_QUIZ, FINISH_QUIZ } from "../actions"
 
 const INITIAL_STATE = {
   score: 0,
   total: 0,
   currentIndex: 0,
-  showQuiz: false
+  _isShow: false,
+  _isFinish: false,
 }
 
 const quiz = (state = INITIAL_STATE, action) => {
-  const {total, currentIndex, showQuiz} = action
+  const {total, _isShow} = action
 
   switch (action.type) {
+
+    case INIT_QUIZ:
+      return INITIAL_STATE
+
     case GET_RIGHT_ANSWER:
+
       return {
         ...state,
-        score: state.score+1
+        score: state.score + 1,
+        currentIndex: state.currentIndex + 1,
+        _isFinish: state.total === state.currentIndex + 1? true : false
       }
+
     case GET_WRONG_ANSWER:
-      let score = state.score-1
-      score = score < 0? score = 0 : score
       return {
         ...state,
-        score: score,
+        currentIndex: state.currentIndex + 1,
+        _isFinish: state.total === state.currentIndex + 1? true : false
       }
+
     case START_QUIZ_AVAILABLE:
       return {
         ...state,
-        showQuiz,
+        _isShow,
         total
       }
-    case INIT_QUIZ:
-      return INITIAL_STATE
+
     default:
       return state
   }
