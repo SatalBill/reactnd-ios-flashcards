@@ -9,19 +9,11 @@ export default class StartQuiz extends Component {
 
   componentDidMount () {
     const quizNum = this.props.quiz.questions.length
-    this.props.startQuiz({showQuiz: true, total: quizNum})
+    this.props.startQuiz({_isShow: true, total: quizNum})
   }
 
   componentWillUnmount () {
     this.props.clearQuiz()
-  }
-
-  swipeRightAnswer = () => {
-    this.props.getRightAnswer()
-  }
-
-  swipeWrongAnswer = () => {
-    this.props.getWrongAnswer()
   }
 
   render () {
@@ -36,21 +28,20 @@ export default class StartQuiz extends Component {
           style={styles.content}
           renderNoMoreCards={() =>
             <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
-               No more cards:(
+              {`${quiz.score}/${quiz.total}`}
             </Text>
           }
           ref={swiper => {
             this.swiper = swiper
           }}
-          onSwiped={this.swipeRightAnswer}
-          onSwipedLeft={this.swipeWrongAnswer}
+          onSwiped={() => this.props.getRightAnswer()}
+          onSwipedLeft={() => this.props.getWrongAnswer()}
         >
 
           {quiz.questions.length > 0 && quiz.questions.map((card, i) =>
             <Card
               key={`quiz-${i}`}
               style={[styles.card]}
-              onSwipedLeft={this.swipeWrongAnswer}
             >
               <Text
                 style={styles.label}>{card.question}
@@ -69,15 +60,6 @@ export default class StartQuiz extends Component {
                 name="x"
                 type="feather"
                 color="#fd267d"/>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.orange]} onPress={() => {
-              this.swiper.goBackFromLeft()
-            }}>
-              <Icon
-                size={18}
-                name="rotate-ccw"
-                type="feather"
-                color="#FEB12C"/>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, styles.green]} onPress={() => {
               this.swiper.swipeRight()
