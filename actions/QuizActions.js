@@ -12,10 +12,10 @@ export const getWrongAnswer = () => {
   }
 }
 
-export const startQuiz = ({showQuiz, total}) => {
+export const startQuiz = ({_isShow, total}) => {
   return {
     type: START_QUIZ_AVAILABLE,
-    showQuiz,
+    _isShow,
     total
   }
 }
