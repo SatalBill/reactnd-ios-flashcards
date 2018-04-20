@@ -4,6 +4,7 @@ import { Icon } from "react-native-elements"
 import CardStack, { Card } from "react-native-card-stack-swiper"
 import MainDeckHeader from "../MainDeckHeader"
 import styles from "./styles"
+import CardFlip from "react-native-card-flip"
 
 export default class StartQuiz extends Component {
 
@@ -32,19 +33,22 @@ export default class StartQuiz extends Component {
 
         <CardStack
           style={styles.content}
+          disableTopSwipe={true}
+          disableBottomSwipe={true}
+
           renderNoMoreCards={() =>
             <View>
-              {quiz._isFinish ?
-
-                <View>
+              {quiz._isFinish ? <View>
                   <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
                     {scoreStatue}
                   </Text>
                   <TouchableOpacity
                     style={[styles.button, styles.orange]}
                     onPress={() => {
-                       this.swiper.goBackFromLeft()
-                    }}></TouchableOpacity>
+                      this.swiper.goBackFromTop()
+                    }}>
+
+                  </TouchableOpacity>
                 </View>
                 : <View>
                   <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
@@ -65,13 +69,19 @@ export default class StartQuiz extends Component {
           onSwipedLeft={this.props.getWrongAnswer}
         >
           {quiz.questions.length > 0 && quiz.questions.map((card, i) =>
-            <Card
-              key={`quiz-${i}`}
-              style={[styles.card]}
-            >
-              <Text
-                style={styles.label}>{card.question}
-              </Text>
+
+            <Card>
+              <CardFlip
+
+                key={`quiz-${i}`}
+                style={[styles.card]} ref={(card) => this.card = card}>
+                <TouchableOpacity activeOpacity={1} style={[styles.card, styles.card1]}
+                                  onPress={() => this.card.flip()}><Text
+                  style={styles.label}>{card.question}</Text></TouchableOpacity>
+                <TouchableOpacity activeOpacity={1} style={[styles.card, styles.card2]}
+                                  onPress={() => this.card.flip()}><Text
+                  style={styles.label}>{card.answer}</Text></TouchableOpacity>
+              </CardFlip>
             </Card>
           )}
         </CardStack>
