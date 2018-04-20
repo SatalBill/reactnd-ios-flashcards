@@ -35,6 +35,7 @@
     "react": "16.2.0",
     "react-devtools": "^3.1.0",
     "react-native": "0.52.0",
+    "react-native-card-flip": "^1.0.3",
     "react-native-elements": "^1.0.0-beta2",
     "react-navigation-redux-helpers": "^1.0.3",
     "react-redux": "^5.0.7",
