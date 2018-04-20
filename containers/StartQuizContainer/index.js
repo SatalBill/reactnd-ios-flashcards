@@ -10,26 +10,27 @@ const mapStateToProps = state => {
       score: state.quiz.score,
       total: state.quiz.total,
       currentIndex: state.quiz.currentIndex,
-      isShow: state.quiz.showQuiz
+      _isShow: state.quiz._isShow,
+      _isFinish: state.quiz._isFinish
     }
   }
 }
 
-const mapDispatchToProps =  dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     clearQuiz: () => {
       dispatch(clearQuiz())
     },
 
-    startQuiz:({showQuiz, total}) => {
-      dispatch(startQuiz({showQuiz, total}))
+    startQuiz: ({_isShow, total}) => {
+      dispatch(startQuiz({_isShow, total}))
     },
 
-    getWrongAnswer: () =>{
+    getWrongAnswer: () => {
       dispatch(getWrongAnswer())
     },
 
-    getRightAnswer: () =>{
+    getRightAnswer: () => {
       dispatch(getRightAnswer())
     },
 
@@ -38,8 +39,6 @@ const mapDispatchToProps =  dispatch => {
     }
   }
 }
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartQuiz)
 
