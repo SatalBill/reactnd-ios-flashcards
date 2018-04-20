@@ -19,25 +19,51 @@ export default class StartQuiz extends Component {
   render () {
     const {quiz} = this.props
     const title = quiz ? `${quiz.title}` : " "
+    const scoreStatue = `${quiz.score}/${quiz.total}`
+
     return (
       <View style={{flex: 1}}>
         <MainDeckHeader
           title={title}
         />
+        <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
+          {scoreStatue}
+        </Text>
+
         <CardStack
           style={styles.content}
           renderNoMoreCards={() =>
-            <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
-              {`${quiz.score}/${quiz.total}`}
-            </Text>
+            <View>
+              {quiz._isFinish ?
+
+                <View>
+                  <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
+                    {scoreStatue}
+                  </Text>
+                  <TouchableOpacity
+                    style={[styles.button, styles.orange]}
+                    onPress={() => {
+                       this.swiper.goBackFromLeft()
+                    }}></TouchableOpacity>
+                </View>
+                : <View>
+                  <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
+                    LOADING
+                  </Text>
+
+                </View>
+
+              }
+
+            </View>
+
           }
           ref={swiper => {
             this.swiper = swiper
           }}
-          onSwiped={() => this.props.getRightAnswer()}
-          onSwipedLeft={() => this.props.getWrongAnswer()}
+          onSwipedRight={this.props.getRightAnswer}
+          onSwipedLeft={this.props.getWrongAnswer}
         >
-
           {quiz.questions.length > 0 && quiz.questions.map((card, i) =>
             <Card
               key={`quiz-${i}`}
