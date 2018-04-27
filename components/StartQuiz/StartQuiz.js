@@ -1,10 +1,11 @@
 import React, { Component } from "react"
-import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native"
+import { Text, View, TouchableOpacity } from "react-native"
 import { Icon } from "react-native-elements"
+import CardFlip from "react-native-card-flip"
 import CardStack, { Card } from "react-native-card-stack-swiper"
 import MainDeckHeader from "../MainDeckHeader"
+import DonutChart from "../DonutChart"
 import styles from "./styles"
-import CardFlip from "react-native-card-flip"
 
 export default class StartQuiz extends Component {
 
@@ -17,8 +18,8 @@ export default class StartQuiz extends Component {
     this.props.clearQuiz()
   }
 
-  getGradeMessage = (score, total) => {
-    const percentage = (score / total) * 100
+  getGradeMessage = (percentage) => {
+
     const message = {
       perfect: "perfect",
       excellent: "excellent",
@@ -29,31 +30,33 @@ export default class StartQuiz extends Component {
     }
 
     let result = ""
-    switch (percentage) {
-      case 100: {
+    switch (true) {
+      case percentage > 80 && percentage <= 100: {
         result = message.perfect
         break
       }
-      case 80: {
+
+      case percentage > 60 && percentage <= 80 : {
         result = message.excellent
         break
       }
-      case 60: {
+
+      case percentage > 40 && percentage <= 60: {
         result = message.good
         break
       }
 
-      case 40: {
+      case percentage > 20 && percentage <= 40: {
         result = message.fair
         break
       }
 
-      case 20: {
+      case percentage > 0 && percentage <= 20: {
         result = message.poor
         break
       }
 
-      case 0: {
+      case percentage == 0: {
         result = message.bad
         break
       }
@@ -66,13 +69,14 @@ export default class StartQuiz extends Component {
 
   render () {
     const {quiz} = this.props
-    const title = quiz ? `${quiz.title}` : " "
+    const title = quiz.title ? `${quiz.title}` : " "
     const scoreStatus = `${quiz.score}/${quiz.total}`
+    const percentage = (quiz.score / quiz.total) * 100
 
-    const gradeMessage = this.getGradeMessage(quiz.score, quiz.total)
+    const gradeMessage = this.getGradeMessage(percentage)
 
     return (
-      <View style={{flex: 1}}>
+      <View style={styles.container}>
         <MainDeckHeader
           title={title}
         />
@@ -87,57 +91,53 @@ export default class StartQuiz extends Component {
           style={styles.content}
           disableTopSwipe={true}
           disableBottomSwipe={true}
-
-          renderNoMoreCards={() =>
-            <View>
-              {quiz._isFinish ? <View>
-                  <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
-                    {scoreStatus}
-                  </Text>
-                  <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
-                    {gradeMessage}
-                  </Text>
-                  {/*<TouchableOpacity*/}
-                  {/*style={[styles.button, styles.orange]}*/}
-                  {/*onPress={() => {*/}
-                  {/*this.swiper.goBackFromTop()*/}
-                  {/*}}>*/}
-                  {/*</TouchableOpacity>*/}
-                </View>
-                : <View>
-                  <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
-                    LOADING
-                  </Text>
-
-                </View>
-
-              }
-
-            </View>
-
-          }
           ref={swiper => {
             this.swiper = swiper
           }}
           onSwipedRight={this.props.getRightAnswer}
           onSwipedLeft={this.props.getWrongAnswer}
+          renderNoMoreCards={() =>
+            <View>
+              {quiz._isFinish ? <DonutChart
+                  score={quiz.score}
+                  total={quiz.total}
+                  scoreStatus={scoreStatus}
+                  gradeMessage={gradeMessage}
+                  percentage={percentage}
+                />
+                : <View>
+                  <Text style={{fontWeight: "700", fontSize: 18, color: "gray"}}>
+                    LOADING
+                  </Text>
+                </View>
+              }
+
+            </View>
+
+          }
+
         >
           {quiz.questions.length > 0 && quiz.questions.map((card, i) =>
             <Card key={`quiz-${i}`}>
               <CardFlip
-                style={[styles.card]} ref={(card) => this.card = card}>
-                <TouchableOpacity activeOpacity={1} style={[styles.card, styles.card1]}
-                                  onPress={() => this.card.flip()}><Text
-                  style={styles.label}>{card.question}</Text></TouchableOpacity>
-                <TouchableOpacity activeOpacity={1} style={[styles.card, styles.card2]}
-                                  onPress={() => this.card.flip()}><Text
-                  style={styles.label}>{card.answer}</Text></TouchableOpacity>
+                style={[styles.card]}
+                ref={card => this[`card${i}`] = card } >
+                <TouchableOpacity activeOpacity={1}
+                                  style={[styles.card, styles.card1]}
+                                  onPress={() => this[`card${i}`].flip()}>
+                  <Text style={styles.label}>{card.question}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity activeOpacity={1}
+                                  style={[styles.card, styles.card2]}
+                                  onPress={() => this[`card${i}`].flip()}>
+                  <Text style={styles.label}>{card.answer}</Text>
+                </TouchableOpacity>
               </CardFlip>
             </Card>
           )}
         </CardStack>
 
-
+        {!quiz._isFinish &&
         <View style={styles.footer}>
           <View style={styles.buttonContainer}>
             <TouchableOpacity style={[styles.button, styles.red]} onPress={() => {
@@ -159,10 +159,15 @@ export default class StartQuiz extends Component {
                 color="#01df8a"/>
             </TouchableOpacity>
           </View>
-        </View>
+        </View>}
       </View>
     )
   }
 }
+
+
+
+
+
 
 
