@@ -36,14 +36,13 @@
     "react-devtools": "^3.1.0",
     "react-native": "0.52.0",
     "react-native-card-flip": "^1.0.3",
-    "react-native-elements": "^1.0.0-beta2",
+    "react-native-elements": "^1.0.0-beta4",
     "react-native-svg": "^6.3.1",
     "react-navigation-redux-helpers": "^1.0.3",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0",
-    "styled-components": "^3.2.6"
+    "redux-thunk": "^2.2.0"
   },
   "description": "A project for udacity nanodegree final assignment",
   "author": "Sujin Lee @sujinleeme",
