@@ -1,116 +1,158 @@
 import React, { Component } from "react"
-import Svg, {
-  Circle,
-  TSpan,
-  Text,
-} from "react-native-svg"
+import { View, TouchableHighlight, Animated, Text, Modal } from "react-native"
+import Svg, { G, Circle } from "react-native-svg"
+import { Button } from "react-native-elements"
 
-import { View, TouchableOpacity, Animated } from "react-native"
+import { connect } from "react-redux"
+import { clearQuiz, startQuiz, getRightAnswer, getWrongAnswer, goToBack } from "../../actions"
+import { getGradeMessage } from "./GradMessage"
 
 import PropTypes from "prop-types"
+import styles from "./styles"
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle)
 
-export default class DonutChart extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      valuelabel: "Completed",
-      size: 180,
-      strokewidth: 26,
-      stroke: new Animated.Value(0),
-      circumference: new Animated.Value(0),
-
-    }
-    this.animatedValue = new Animated.Value(0)
-
+class DonutChart extends Component {
+  state = {
+    valuelabel: "Completed",
+    size: 200,
+    strokeWidth: 10,
+    animatedStroke: new Animated.Value(0),
+    stroke: 0,
+    circumference: 0,
+    modalVisible: false
   }
 
   componentDidMount () {
-    this.handleAnimation()
+    this.setState({modalVisible: true})
+    this.getStrokeValue()
+  }
 
+  restartQuiz () {
+    this.props.clearQuiz()
+    const quizNum = this.props.questions.length
+    return this.props.startQuiz({_isShow: true, total: quizNum})
+  }
+
+  setModalVisible (visible) {
+    this.setState({modalVisible: visible},
+      this.restartQuiz()
+    )
+  }
+
+  getStrokeValue () {
+    const {size, strokeWidth} = this.state
+    const {percent} = this.props.score
+    const halfsize = (size * 0.5)
+    const radius = halfsize - (strokeWidth * 0.5)
+    const circumference = 2 * Math.PI * radius
+    const stroke = ((percent * circumference) / 100)
+    // `${quiz.score}/${quiz.total}`
+
+    const rotate = `rotate(-90 ${halfsize}, ${halfsize})`
+
+    this.setState({
+        circumference,
+        radius,
+        halfsize,
+        rotate,
+        stroke
+      }, () => {
+        this.handleAnimation()
+      }
+    )
   }
 
   handleAnimation () {
-    const {size, strokewidth} = this.state
-    const {percentage} = this.props
-
-    const halfsize = (size * 0.5)
-    const radius = halfsize - (strokewidth * 0.5)
-    const circumference = 2 * Math.PI * radius
-    const strokeval = ((percentage * circumference) / 100)
-
-    this.state.stroke.addListener(stroke => {
-      this.setState({stroke: stroke.value})
+    const stroke = this.state.stroke
+    this.state.animatedStroke.addListener(animatedStroke => {
+      this.setState({animatedStroke: animatedStroke.value})
     })
-
     Animated.timing(
-      this.state.stroke, {
-        toValue: strokeval,
-        duration: 1000
+      this.state.animatedStroke, {
+        toValue: stroke,
+        duration: 900
       }
     ).start()
   }
 
   render () {
-    const {size, strokewidth,} = this.state
-    const {percentage} = this.props
+    const {_isMounted, rotate, animatedStroke, circumference, halfsize, radius, strokeWidth} = this.state
+    const {size, scoreStatus, score} = this.props
+    console.log(score)
+    const gradeMessage = getGradeMessage(score.percent)
 
-    const halfsize = (size * 0.5)
-    const radius = halfsize - (strokewidth * 0.5)
-    const circumference = 2 * Math.PI * radius
-    const strokeval = ((percentage * circumference) / 100)
-    // const dashval = [strokeval, circumference]
-    const rotateval = "rotate(-90 " + halfsize + "," + halfsize + ")"
-
-    console.log(strokeDasharray)
-
-    const strokevalNew = this.animatedValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, strokeval]
-    })
-
-    const circumferenceNew = this.animatedValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [strokeval, circumference]
-    })
-    let strokeDasharray = [strokevalNew, circumferenceNew]
-    let strokeTest = [this.state.stroke, circumference]
-
-    // const circumferencelNew = this.animatedValue.interpolate({
-    //   inputRange: [0, 1],
-    //   outputRange: [0, circumference]
-    // })
-
+    let strokeDasharray = `${animatedStroke}, ${circumference}`
+    const _isAnimated = typeof(animatedStroke) === "number"
+      ? true
+      : false
     return (
-      <View>
-        <Svg
-          height="300"
-          width="300"
-        >
-          <Circle r={radius} cx={halfsize} cy={halfsize}
-            // transform={rotateval}
-                  fill="transparent"
-                  stroke="#DAE2E5"
-                  strokeWidth={26}
-          />
-          <AnimatedCircle r={radius}
+      <Modal animationType={"fade"}
+             transparent={true}
+             visible={this.state.modalVisible}
+             onRequestClose={() => {
+               // console.log(this.props.clearQuiz)
+             }}>
+
+
+        <View style={styles.modal}>
+          <View style={styles.container}>
+
+            <View style={styles.content}>
+
+              <View style={styles.label}>
+                <Text style={{fontWeight: "700", fontSize: 18, color: "red"}}>
+                  {scoreStatus}
+                </Text>
+                <Text style={{fontWeight: "700", fontSize: 18, color: "red"}}>
+                  {gradeMessage.toUpperCase()}
+                </Text>
+
+              </View>
+
+
+              <Svg
+                style={styles.chart}
+                width={`${size}`}
+                height={`${size}`}
+
+              >
+                <G>
+                  <Circle r={radius}
                           cx={halfsize}
                           cy={halfsize}
+                          transform={rotate}
                           fill="transparent"
-                          stroke="#009688"
-                          strokeWidth={26}
-            // ref={ref => (this._circle = ref)}
+                          stroke="#DAE2E5"
+                          strokeWidth={strokeWidth}
+                  />
+                  <AnimatedCircle r={radius}
+                                  cx={halfsize}
+                                  cy={halfsize}
+                                  fill="transparent"
+                                  stroke={_isAnimated
+                                    ? "#009688"
+                                    : "#DAE2E5"}
+                                  strokeWidth={strokeWidth}
+                                  strokeDasharray={strokeDasharray}
+                                  transform={rotate}
+                  />
+                </G>
+              </Svg>
+            </View>
+            <View style={styles.buttonContainer}>
 
-            // ref={ ref => this._myCircle = ref }
-                          strokeDasharray={strokeTest}
-            // transition={"strokeDasharray .3s ease"}
-                          transform={rotateval}
-          />
-
-        </Svg>
-
-      </View>
+              <Button
+                title="RETRY?"
+                onPress={() => {
+                  this.setModalVisible(!this.state.modalVisible)
+                }}
+              >
+              </Button>
+            </View>
+          </View>
+        </View>
+      </Modal>
     )
   }
 }
@@ -119,8 +161,34 @@ DonutChart.propTypes = {
   // value: PropTypes.number,        // value the chart should show
   // valuelabel: PropTypes.string,   // label for the chart
   // size: PropTypes.number,         // diameter of chart
-  // strokewidth: PropTypes.number   // width of chart line
+  // strokeWidth: PropTypes.number   // width of chart line
 }
 
+const mapStateToProps = state => {
+  return {
+    title: state.decks.currentDeck.title,
+    questions: state.decks.currentDeck.questions,
+    score: state.quiz.score,
+    total: state.quiz.total,
+    currentIndex: state.quiz.currentIndex,
+    _isShow: state.quiz._isShow,
+    _isFinish: state.quiz._isFinish
 
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+
+  return {
+    clearQuiz: () => {
+      dispatch(clearQuiz())
+    },
+
+    startQuiz: ({_isShow, total}) => {
+      dispatch(startQuiz({_isShow, total}))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DonutChart)
 
