@@ -1,13 +1,14 @@
 import React, { Component } from "react"
-import { View, TouchableHighlight, Animated, Text, Modal } from "react-native"
+import PropTypes from "prop-types"
+import { View, TouchableHighlight, Animated, Text } from "react-native"
 import Svg, { G, Circle } from "react-native-svg"
 import { Button } from "react-native-elements"
-
+import Modal from "react-native-modal"
 import { connect } from "react-redux"
-import { clearQuiz, startQuiz, getRightAnswer, getWrongAnswer, goToBack } from "../../actions"
+
+import { clearQuiz, startQuiz } from "../../actions"
 import { getGradeMessage } from "./GradMessage"
 
-import PropTypes from "prop-types"
 import styles from "./styles"
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle)
@@ -77,9 +78,8 @@ class DonutChart extends Component {
   }
 
   render () {
-    const {_isMounted, rotate, animatedStroke, circumference, halfsize, radius, strokeWidth} = this.state
+    const {rotate, animatedStroke, circumference, halfsize, radius, strokeWidth} = this.state
     const {size, scoreStatus, score} = this.props
-    console.log(score)
     const gradeMessage = getGradeMessage(score.percent)
 
     let strokeDasharray = `${animatedStroke}, ${circumference}`
@@ -87,25 +87,29 @@ class DonutChart extends Component {
       ? true
       : false
     return (
-      <Modal animationType={"fade"}
-             transparent={true}
-             visible={this.state.modalVisible}
-             onRequestClose={() => {
-               // console.log(this.props.clearQuiz)
-             }}>
-
+      <Modal
+        animationIn={"fadeIn"}
+        animationOut={"fadeOut"}
+        isVisible={this.state.modalVisible}
+        animationInTiming={1000}
+        animationOutTiming={1000}
+      >
 
         <View style={styles.modal}>
           <View style={styles.container}>
-
+            <Text style={{fontWeight: "700", fontSize: 28}}>
+              {`${gradeMessage.toUpperCase()}!`}
+            </Text>
             <View style={styles.content}>
-
               <View style={styles.label}>
-                <Text style={{fontWeight: "700", fontSize: 18, color: "red"}}>
-                  {scoreStatus}
+                <Text style={{fontWeight: "700", fontSize: 18}}>
+                  Your score is
                 </Text>
-                <Text style={{fontWeight: "700", fontSize: 18, color: "red"}}>
-                  {gradeMessage.toUpperCase()}
+                <Text style={{fontWeight: "800", fontSize: 30}}>
+                  {`${score.percent}%`}
+                </Text>
+                <Text style={{fontWeight: "700", fontSize: 18}}>
+                  {scoreStatus}
                 </Text>
 
               </View>

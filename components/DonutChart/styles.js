@@ -1,26 +1,47 @@
-
-
 import { StyleSheet } from "react-native"
+import { deviceWidth, deviceHeight } from "../Dimensions"
 
 const styles = StyleSheet.create({
-  donutchartTrack: {
-    fill: 'transparent',
-    stroke: '#DAE2E5',
-    strokeWidth: 26
+  modal: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: "rgba(0,0,0,0.5)",
   },
   container: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderRadius: 10,
+    backgroundColor: "#fff",
+    padding: 45,
+    height: 400,
+    width: 300,
+  },
+  content: {
+    backgroundColor: "#fff",
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  chart: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
-  },
-  decklist: {
-    flex: 2,
-    backgroundColor: "#fff",
     justifyContent: "center",
-    alignSelf: 'stretch',
   },
+  label: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#fff",
+  }
 })
-
 
 export default styles
