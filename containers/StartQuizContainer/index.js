@@ -17,6 +17,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = (dispatch) => {
+
   return {
     clearQuiz: () => {
       dispatch(clearQuiz())

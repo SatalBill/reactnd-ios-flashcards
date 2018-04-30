@@ -1,20 +1,27 @@
 import { StyleSheet } from "react-native"
+import { deviceWidth, deviceHeight } from "../Dimensions"
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
     backgroundColor: "#fff",
   },
   content: {
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center'
+
+  },
+
+  cardGroup: {
     flex: 5,
     alignItems: "center",
     justifyContent: "center",
 
   },
   card: {
-    width: 320,
-    height: 470,
+    width: deviceWidth*0.8,
+    height: deviceHeight*0.7,
     padding: 14,
     backgroundColor: "#FE474C",
     borderRadius: 5,
@@ -48,7 +55,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   buttonContainer: {
-    width: 220,
+    width: 300,
     flexDirection: "row",
     justifyContent: "space-between",
   },
@@ -67,25 +74,23 @@ const styles = StyleSheet.create({
   orange: {
     width: 55,
     height: 55,
-    borderWidth: 6,
     borderColor: "rgb(246,190,66)",
     borderRadius: 55,
     marginTop: -15
   },
   green: {
-    width: 75,
-    height: 75,
+    width: 65,
+    height: 65,
     backgroundColor: "#fff",
-    borderRadius: 75,
-    borderWidth: 6,
+    borderRadius: 65,
+
     borderColor: "#01df8a",
   },
   red: {
-    width: 75,
-    height: 75,
+    width: 65,
+    height: 65,
     backgroundColor: "#fff",
-    borderRadius: 75,
-    borderWidth: 6,
+    borderRadius: 65,
     borderColor: "#fd267d",
   }
 })
