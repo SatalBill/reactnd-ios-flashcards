@@ -1,9 +1,9 @@
 import { StackNavigator } from "react-navigation"
-import DeckListContainer from "../../containers/DeckListContainer/index"
-import NewDeckContainer from "../../containers/NewDeckContainer/index"
-import DeckDetailContainer from "../../containers/DeckDetailContainer/index"
-import NewQuizContainer from "../../containers/NewQuizContainer/index"
-import StartQuizContainer from "../../containers/StartQuizContainer/index"
+import DeckListContainer from "../../containers/DeckListContainer"
+import NewDeckContainer from "../../containers/NewDeckContainer"
+import DeckDetailContainer from "../../containers/DeckDetailContainer"
+import NewQuizContainer from "../../containers/NewQuizContainer"
+import StartQuizContainer from "../../containers/StartQuizContainer"
 
 
 export default StackNavigator({
@@ -11,5 +11,6 @@ export default StackNavigator({
   NewDeck: {screen: NewDeckContainer, navigationOptions: { header: null }},
   DeckDetail: {screen: DeckDetailContainer, navigationOptions: { header: null }},
   NewQuiz: {screen: NewQuizContainer, navigationOptions: { header: null }},
-  StartQuiz: {screen: StartQuizContainer, navigationOptions: { header: null }}
+  StartQuiz: {screen: StartQuizContainer, navigationOptions: { header: null }},
+
 })

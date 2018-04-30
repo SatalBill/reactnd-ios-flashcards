@@ -1,6 +1,6 @@
+import { AsyncStorage } from "react-native"
 import { DECKS_AVAILABLE, INIT_DECKS, ADD_DECK, RECEIVE_DECK, CLEAR_DECK, ADD_QUIZ_TO_DECK } from "./types"
 import SampleData from "../config/SampleData"
-import { AsyncStorage } from "react-native"
 import { ID } from "../utils/helper"
 
 const DECK_STORAGE_KEY = "FlashCard:Deck"
@@ -15,7 +15,6 @@ export const getDecks = () => {
 
 export const initDecks = () => {
   return (dispatch) => {
-    //AsyncStorage.clear()
     AsyncStorage.getItem(DECK_STORAGE_KEY, (err, decks) => {
       decks = JSON.parse(decks)
       const isEmpty = decks === null || Object.keys(decks).length === 0
