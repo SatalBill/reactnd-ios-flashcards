@@ -24,13 +24,12 @@ export const CLEAR_DECK = "CLEAR_DECK"
 
 // screen
 export const GO_TO_BACK = "GO_TO_BACK"
-
 export const OPEN_NEW_DECK_SCREEN = "OPEN_NEW_DECK_SCREEN"
-
 export const OPEN_DECK_DETAIL_SCREEN = "OPEN_DECK_DETAIL_SCREEN"
-
 export const OPEN_HOME_SCREEN = "OPEN_HOME_SCREEN"
-
 export const OPEN_NEW_QUIZ_SCREEN = "OPEN_NEW_QUIZ_SCREEN"
-
 export const OPEN_START_QUIZ_SCREEN = "OPEN_START_QUIZ_SCREEN"
+
+
+// font
+export const LOAD_FONTS = "LOAD_FONTS"
