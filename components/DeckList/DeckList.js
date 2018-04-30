@@ -1,16 +1,20 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { View, ScrollView } from "react-native"
+import { Font } from "expo"
 import { Avatar, Text, Button, List, ListItem, Divider } from "react-native-elements"
 import styles from "./styles"
-import { OPEN_DECK_DETAIL_SCREEN } from "../../actions"
 
 export default class DeckList extends Component {
   _isMounted = false
 
-  componentDidMount () {
+  async componentDidMount () {
     this._isMounted = true
-    this.fecthDecks()
+    await Font.loadAsync({
+      "heebo-medium": require("../../assets/fonts/Heebo/Heebo-Medium.ttf"),
+    })
+    await this.props.loadFonts()
+    await this.fecthDecks()
   }
 
   componentWillUnmount () {
@@ -18,16 +22,16 @@ export default class DeckList extends Component {
   }
 
   fecthDecks = () => {
-    this._isMounted && this.props.fetchDecks()
+    this.props.fetchDecks()
   }
 
-  openDeckDetail = (searchKey) => {
+  openDeck = (searchKey) => {
     this.props.receiveDeck(searchKey)
-    this.props.navigation.dispatch({type: OPEN_DECK_DETAIL_SCREEN})
+    this.props.openDeckDetail()
   }
 
   render () {
-    const {list} = this.props
+    const {list, fontLoaded} = this.props
 
     return (
       <View style={styles.container}>
@@ -38,7 +42,9 @@ export default class DeckList extends Component {
             rounded
             source={{uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg"}}
           />
-          <Text h4>Sujin Lee</Text>
+          {fontLoaded &&
+          <Text style={{fontFamily: "heebo-medium"}} h4>Sujin Lee</Text>
+          }
           <Button
             onPress={this.props.openNewDeck}
             title="Create a new deck"
@@ -52,7 +58,7 @@ export default class DeckList extends Component {
 
             <Decks
               list={list}
-              onPress={this.openDeckDetail}
+              onPress={this.openDeck}
             />
             }
           </ScrollView>
@@ -62,8 +68,6 @@ export default class DeckList extends Component {
   }
 }
 
-const keyExtractor = (item, index) => index
-
 const Decks = ({list, onPress}) =>
   <View>
     {
@@ -71,7 +75,9 @@ const Decks = ({list, onPress}) =>
         <Deck
           key={i}
           title={list[k].title}
-          quizNum={list[k].questions ? list[k].questions.length : 0}
+          quizNum={list[k].questions
+            ? list[k].questions.length
+            : 0}
           onPress={() => onPress(list[k].id)}
         />
       )
@@ -90,22 +96,22 @@ const Deck = ({title, quizNum = 0, onPress}) =>
 
 // Typechecking With PropTypes
 const DeckShape = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string,
-  questions: PropTypes.oneOfType([PropTypes.object]).isRequired
+  // id: PropTypes.string.isRequired,
+  // title: PropTypes.string,
+  // questions: PropTypes.oneOfType([PropTypes.object]).isRequired
 }
 
 DeckList.propTypes = {
-  list: PropTypes.objectOf(PropTypes.shape(DeckShape))
+  // list: PropTypes.objectOf(PropTypes.shape(DeckShape))
 }
 
 Decks.propTypes = {
-  list: PropTypes.object,
-  onPress: PropTypes.func
+  // list: PropTypes.object,
+  // onPress: PropTypes.func
 }
 
 Deck.propTypes = {
-  title: PropTypes.string,
-  quizNum: PropTypes.number,
-  onPress: PropTypes.func
+  // title: PropTypes.string,
+  // quizNum: PropTypes.number,
+  // onPress: PropTypes.func
 }

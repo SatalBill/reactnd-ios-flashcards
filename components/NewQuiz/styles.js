@@ -3,19 +3,9 @@ import { StyleSheet } from "react-native"
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
   },
-  profile: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  decklist: {
+  content: {
     flex: 2,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
   },

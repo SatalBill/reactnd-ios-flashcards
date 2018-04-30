@@ -1,39 +1,19 @@
 import { StyleSheet } from "react-native"
+import { StatusBar } from "react-native"
 
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 19,
+  },
   innerContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    // backgroundColor: "#fff",
-
   },
 
   outerContainer: {
-    borderBottomColor: '#f2f2f2',
-    borderBottomWidth: 1,
-    // backgroundColor: "#fff",
+    backgroundColor: "#fff",
+    borderBottomColor: "#fff",
+    marginTop: StatusBar.currentHeight
 
-
-  },
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignSelf: 'stretch',
-  },
-  profile: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  decklist: {
-    flex: 2,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignSelf: 'stretch',
-  },
+  }
 })
 
 export default styles

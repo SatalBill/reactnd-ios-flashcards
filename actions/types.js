@@ -12,7 +12,10 @@ export const DELETE_DECK = "DELETE_DECKS"
 
 // quiz
 export const ADD_QUIZ_TO_DECK = "ADD_QUIZ_TO_DECK"
-
+export const GET_RIGHT_ANSWER = "GET_RIGHT_ANSWER"
+export const GET_WRONG_ANSWER = "GET_WRONG_ANSWER"
+export const START_QUIZ_AVAILABLE = "START_QUIZ_AVAILABLE"
+export const INIT_QUIZ = "INIT_QUIZ"
 
 // open deck
 export const RECEIVE_DECK = "RECEIVE_DECK"
@@ -21,13 +24,12 @@ export const CLEAR_DECK = "CLEAR_DECK"
 
 // screen
 export const GO_TO_BACK = "GO_TO_BACK"
-
 export const OPEN_NEW_DECK_SCREEN = "OPEN_NEW_DECK_SCREEN"
-
 export const OPEN_DECK_DETAIL_SCREEN = "OPEN_DECK_DETAIL_SCREEN"
-
 export const OPEN_HOME_SCREEN = "OPEN_HOME_SCREEN"
-
 export const OPEN_NEW_QUIZ_SCREEN = "OPEN_NEW_QUIZ_SCREEN"
-
 export const OPEN_START_QUIZ_SCREEN = "OPEN_START_QUIZ_SCREEN"
+
+
+// font
+export const LOAD_FONTS = "LOAD_FONTS"

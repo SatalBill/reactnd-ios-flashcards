@@ -1,19 +1,15 @@
 import React, { Component } from "react"
-
-import { View, Text, Header } from "react-native-elements"
+import { View, Header } from "react-native-elements"
 import { GoBackIcon } from "../NavIcons"
 import styles from "./styles"
 
 const MainDeckHeader = ({title}) =>
   <Header
-    // backgroundColor="#fff"
+    statusBarProps={{barStyle: "light-content", translucent: true }}
     leftComponent={<GoBackIcon/>}
-    centerComponent={<DeckTitleName title={title}/>}
+    centerComponent={{text: title, style: styles.title}}
     innerContainerStyles={styles.innerContainer}
     outerContainerStyles={styles.outerContainer}
   />
-
-const DeckTitleName = ({title}) =>
-  <Text>{title}</Text>
 
 export default MainDeckHeader

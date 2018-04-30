@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native"
-import { Header, Text, Card, Button, List, ListItem, Badge, Input } from "react-native-elements"
+import { Button, List, ListItem, Badge, Input } from "react-native-elements"
 import styles from "./styles"
-import { GoBackIcon } from "../NavIcons"
+import MainDeckHeader from "../MainDeckHeader"
 
 export default class NewCard extends Component {
 
@@ -46,13 +46,11 @@ export default class NewCard extends Component {
     const title = currentDeck ? `${currentDeck.title}` : " "
 
     return (
-      <View>
-        <Header
-          leftComponent={<GoBackIcon/>}
-          centerComponent={{text: title, style: {color: "#fff"}}}
-
+      <View style={styles.container}>
+        <MainDeckHeader
+          title={title}
         />
-        <View>
+        <View style={styles.content}>
           <Input
             placeholder="Write Question"
             onChangeText={this.onQuestionChange}
@@ -64,7 +62,7 @@ export default class NewCard extends Component {
             autoFocus
           />
           <Button
-            text="SUBMIT"
+            title="SUBMIT"
             //loading
             //loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
             textStyle={{fontWeight: "700"}}
