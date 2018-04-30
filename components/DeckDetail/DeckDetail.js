@@ -15,7 +15,6 @@ export default class DeckDetail extends Component {
   render () {
     const {currentDeck} = this.props
     const quizNum = currentDeck ? currentDeck.questions.length : 0
-
     const title = currentDeck ? `${currentDeck.title}` : " "
 
     return (
@@ -33,14 +32,13 @@ export default class DeckDetail extends Component {
             title="START QUIZ"
             //loading
             onPress={this.props.openStartQuiz}
-
           />
         </View>
+
         {currentDeck &&
         <QuizCards
           list={currentDeck.questions}
           quizNum={quizNum}
-          //onPress={this.openDeckDetail}
         />
         }
       </View>
@@ -56,15 +54,11 @@ const QuizButton = ({title, onPress}) =>
     buttonStyle={{
       backgroundColor: "rgba(92, 99,216, 1)",
       width: deviceWidth / 2,
+      padding: 1,
       borderWidth: 0,
       borderRadius: 0
     }}
   />
-
-const DeckTitleName = ({title}) =>
-  <View>
-    <Text>{title}</Text>
-  </View>
 
 const QuizCards = ({list, quizNum = 0}) =>
   <ScrollView>
@@ -75,7 +69,6 @@ const QuizCards = ({list, quizNum = 0}) =>
         <Card
           key={i}
           title={list[k].question}
-
         >
           <View>
             <Text>{list[k].answer}</Text>

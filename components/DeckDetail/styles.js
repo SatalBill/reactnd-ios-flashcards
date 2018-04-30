@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
   outerContainer: {
     borderBottomColor: '#f2f2f2',
     borderBottomWidth: 1,
-
   },
   container: {
     flex: 1,
