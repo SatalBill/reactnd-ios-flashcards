@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { View, ScrollView } from "react-native"
 import { Font } from "expo"
-import { Avatar, Text, Button, List, ListItem, Divider } from "react-native-elements"
+import { Avatar, Text, Button, ListItem, Divider } from "react-native-elements"
 import styles from "./styles"
 
 export default class DeckList extends Component {
@@ -14,15 +14,11 @@ export default class DeckList extends Component {
       "heebo-medium": require("../../assets/fonts/Heebo/Heebo-Medium.ttf"),
     })
     await this.props.loadFonts()
-    await this.fecthDecks()
+    await this.props.initDecks()
   }
 
   componentWillUnmount () {
     this._isMounted = false
-  }
-
-  fecthDecks = () => {
-    this.props.fetchDecks()
   }
 
   openDeck = (searchKey) => {
