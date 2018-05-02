@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native"
-import { Button, List, ListItem, Badge, Input } from "react-native-elements"
+import { View, KeyboardAvoidingView } from "react-native"
+import { Button, Input } from "react-native-elements"
 import styles from "./styles"
 import MainDeckHeader from "../MainDeckHeader"
 
@@ -50,7 +50,7 @@ export default class NewCard extends Component {
         <MainDeckHeader
           title={title}
         />
-        <View style={styles.content}>
+        <KeyboardAvoidingView style={styles.content}>
           <Input
             placeholder="Write Question"
             onChangeText={this.onQuestionChange}
@@ -70,7 +70,7 @@ export default class NewCard extends Component {
             containerStyle={{marginTop: 20}}
             onPress={this.submit}
           />
-        </View>
+        </KeyboardAvoidingView>
       </View>
     )
   }

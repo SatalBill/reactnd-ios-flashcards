@@ -1,10 +1,9 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { StyleSheet, View, ScrollView, TouchableOpacity } from "react-native"
-import { Text, Header, Button, Input } from "react-native-elements"
+import { KeyboardAvoidingView, View } from "react-native"
+import { Text, Button, Input } from "react-native-elements"
 import MainDeckHeader from "../MainDeckHeader"
 import styles from "./styles"
-import { GoBackIcon } from "../NavIcons"
 
 export default class NewDeck extends Component {
 
@@ -50,7 +49,7 @@ export default class NewDeck extends Component {
     return (
       <View style={styles.container}>
         <MainDeckHeader/>
-        <View style={styles.content}>
+        <KeyboardAvoidingView style={styles.content}>
           <Input
             placeholder="Write Deck Title"
             onChangeText={this.onTitleChange}
@@ -68,7 +67,7 @@ export default class NewDeck extends Component {
             containerStyle={{marginTop: 20}}
             onPress={this.submit}
           />
-        </View>
+        </KeyboardAvoidingView>
       </View>
     )
   }
