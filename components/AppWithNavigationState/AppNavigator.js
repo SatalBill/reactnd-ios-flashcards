@@ -5,7 +5,6 @@ import DeckDetailContainer from "../../containers/DeckDetailContainer"
 import NewQuizContainer from "../../containers/NewQuizContainer"
 import StartQuizContainer from "../../containers/StartQuizContainer"
 
-
 export default StackNavigator({
   Home: {screen: DeckListContainer, navigationOptions: { header: null } },
   NewDeck: {screen: NewDeckContainer, navigationOptions: { header: null }},

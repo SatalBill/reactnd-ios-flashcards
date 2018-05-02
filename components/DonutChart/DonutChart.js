@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { View, TouchableHighlight, Animated, Text } from "react-native"
+import { View, Animated, Text } from "react-native"
 import Svg, { G, Circle } from "react-native-svg"
 import { Button } from "react-native-elements"
 import Modal from "react-native-modal"

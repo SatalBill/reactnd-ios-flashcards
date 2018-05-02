@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { Text, View, ScrollView, TouchableOpacity } from "react-native"
+import { Text, View, ScrollView } from "react-native"
 import { Card, Button } from "react-native-elements"
 import MainDeckHeader from "../MainDeckHeader"
 import styles from "./styles"
@@ -32,7 +32,6 @@ export default class DeckDetail extends Component {
           />
           <QuizButton
             title="START QUIZ"
-            //loading
             onPress={this.props.openStartQuiz}
           />
         </View>
@@ -83,5 +82,4 @@ const Cardshape = {
 
 DeckDetail.propTypes = {
   currentDeck: PropTypes.shape(Cardshape)
-
 }
