@@ -5,7 +5,7 @@ import { ID } from "../utils/helper"
 
 const DECK_STORAGE_KEY = "FlashCard:Deck"
 
-export const getDecks = () => {
+const getDecks = () => {
   return (dispatch) => {
     AsyncStorage.getItem(DECK_STORAGE_KEY, (err, decks) => {
       dispatch({type: DECKS_AVAILABLE, list: JSON.parse(decks)})
@@ -13,16 +13,21 @@ export const getDecks = () => {
   }
 }
 
+const setDecks = () => {
+  return (dispatch) => {
+    AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(SampleData), () =>
+      dispatch({type: INIT_DECKS, list: SampleData})
+    )
+  }
+}
+
+
 export const initDecks = () => {
   return (dispatch) => {
     AsyncStorage.getItem(DECK_STORAGE_KEY, (err, decks) => {
       decks = JSON.parse(decks)
-      const isEmpty = decks === null || Object.keys(decks).length === 0
-      if (isEmpty) {
-        AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(SampleData), () =>
-          dispatch({type: INIT_DECKS})
-        )
-      }
+      let isEmpty =  decks === null? true : false
+      return isEmpty ? dispatch(setDecks()) : dispatch(getDecks())
     })
   }
 }
@@ -39,7 +44,6 @@ export const addDeck = (deck) => {
   return (dispatch) => {
     AsyncStorage.getItem(DECK_STORAGE_KEY, (err, decks) => {
       if (decks !== null) {
-        console.log(decks)
         AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
             ...newDeck
           }), () =>
