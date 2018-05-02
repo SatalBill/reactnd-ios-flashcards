@@ -14,7 +14,6 @@ const navigation = createReactNavigationReduxMiddleware(
 const logger = createLogger()
 const middleware = [navigation, thunk, logger]
 
-// eslint-disable-next-line no-underscore-dangle
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const Store = createStore(
@@ -24,4 +23,3 @@ const Store = createStore(
   ))
 
 export default Store
-

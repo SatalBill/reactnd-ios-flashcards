@@ -1,14 +1,16 @@
 import { NavigationActions } from "react-navigation"
 import AppNavigator from "../components/AppWithNavigationState/AppNavigator"
-import { GO_TO_BACK, OPEN_NEW_DECK_SCREEN, OPEN_HOME_SCREEN, OPEN_DECK_DETAIL_SCREEN, OPEN_NEW_QUIZ_SCREEN, OPEN_START_QUIZ_SCREEN } from "../actions"
+import {
+  GO_TO_BACK,
+  OPEN_NEW_DECK_SCREEN,
+  OPEN_HOME_SCREEN,
+  OPEN_DECK_DETAIL_SCREEN,
+  OPEN_NEW_QUIZ_SCREEN,
+  OPEN_START_QUIZ_SCREEN
+} from "../actions"
 
-const firstAction = AppNavigator.router.getActionForPathAndParams("Home")
-const tempNavState = AppNavigator.router.getStateForAction(firstAction)
-// const secondAction = AppWithNavigationState.router.getActionForPathAndParams("NewDeck")
 const INIT_NAV_STATE = AppNavigator.router.getStateForAction(
-  firstAction,
-  tempNavState
-)
+  AppNavigator.router.getActionForPathAndParams("Home"))
 
 const nav = (state = INIT_NAV_STATE, action) => {
   let nextState

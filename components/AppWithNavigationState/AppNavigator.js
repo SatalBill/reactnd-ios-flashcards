@@ -12,5 +12,4 @@ export default StackNavigator({
   DeckDetail: {screen: DeckDetailContainer, navigationOptions: { header: null }},
   NewQuiz: {screen: NewQuizContainer, navigationOptions: { header: null }},
   StartQuiz: {screen: StartQuizContainer, navigationOptions: { header: null }},
-
 })
