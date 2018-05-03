@@ -6,9 +6,10 @@ import MainDeckHeader from "../MainDeckHeader"
 import styles from "./styles"
 
 export default class DeckDetail extends Component {
-  componentDidMount() {
+  componentDidMount () {
     this.props.clearDeck()
   }
+
   startQuiz (quizNum) {
     return Number(quizNum) > 0 ? this.props.openStartQuiz(): this.showAlert()
   }
