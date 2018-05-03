@@ -23,6 +23,7 @@ const decks = (state = INITIAL_STATE, action) => {
     case ADD_DECK:
       return {
         ...state,
+        currentDeck,
         list: {
           ...state.list,
           ...newDeck
