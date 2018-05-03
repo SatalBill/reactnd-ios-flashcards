@@ -6,7 +6,7 @@ import { Button } from "react-native-elements"
 import Modal from "react-native-modal"
 import { connect } from "react-redux"
 
-import { clearQuiz, startQuiz } from "../../actions"
+import { clearQuiz, startQuiz, openDeckDetail } from "../../actions"
 import { getGradeMessage } from "./GradMessage"
 
 import styles from "./styles"
@@ -48,8 +48,6 @@ class DonutChart extends Component {
     const radius = halfsize - (strokeWidth * 0.5)
     const circumference = 2 * Math.PI * radius
     const stroke = ((percent * circumference) / 100)
-    // `${quiz.score}/${quiz.total}`
-
     const rotate = `rotate(-90 ${halfsize}, ${halfsize})`
 
     this.setState({
@@ -82,7 +80,6 @@ class DonutChart extends Component {
     const {size, scoreStatus, score} = this.props
     const gradeMessage = getGradeMessage(score.percent)
 
-    let strokeDasharray = `${animatedStroke}, ${circumference}`
     const _isAnimated = typeof(animatedStroke) === "number"
       ? true
       : false
@@ -113,13 +110,10 @@ class DonutChart extends Component {
                 </Text>
 
               </View>
-
-
               <Svg
                 style={styles.chart}
                 width={`${size}`}
                 height={`${size}`}
-
               >
                 <G>
                   <Circle r={radius}
@@ -128,7 +122,7 @@ class DonutChart extends Component {
                           transform={rotate}
                           fill="transparent"
                           stroke="#DAE2E5"
-                          strokeWidth={strokeWidth}
+                          strokeWidth={10}
                   />
                   <AnimatedCircle r={radius}
                                   cx={halfsize}
@@ -137,22 +131,29 @@ class DonutChart extends Component {
                                   stroke={_isAnimated
                                     ? "#009688"
                                     : "#DAE2E5"}
-                                  strokeWidth={strokeWidth}
-                                  strokeDasharray={strokeDasharray}
+                                  strokeWidth={10}
+                                  strokeDasharray={[animatedStroke, circumference]}
                                   transform={rotate}
                   />
                 </G>
               </Svg>
             </View>
             <View style={styles.buttonContainer}>
-
               <Button
-                title="RETRY?"
+                title="RETRY"
+                style={styles.button}
                 onPress={() => {
                   this.setModalVisible(!this.state.modalVisible)
                 }}
-              >
-              </Button>
+              />
+              <Button
+                title="GO TO DECK"
+                onPress={() => {
+                  this.setModalVisible(!this.state.modalVisible)
+                  this.props.openDeckDetail()
+                }}
+              />
+
             </View>
           </View>
         </View>
@@ -184,6 +185,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
 
   return {
+    openDeckDetail: () => {
+      dispatch(openDeckDetail())
+    },
+
     clearQuiz: () => {
       dispatch(clearQuiz())
     },
