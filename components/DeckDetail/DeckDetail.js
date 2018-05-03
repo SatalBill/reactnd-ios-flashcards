@@ -1,29 +1,42 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { Text, View, ScrollView } from "react-native"
+import { Text, View, ScrollView, Alert } from "react-native"
 import { Card, Button } from "react-native-elements"
 import MainDeckHeader from "../MainDeckHeader"
 import styles from "./styles"
 
 export default class DeckDetail extends Component {
-
-  componentWillUnmount () {
+  componentDidMount() {
     this.props.clearDeck()
+  }
+  startQuiz (quizNum) {
+    return Number(quizNum) > 0 ? this.props.openStartQuiz(): this.showAlert()
+  }
+
+  showAlert = () => {
+    Alert.alert(
+      'No Card',
+      'Please Add New Card',
+      [
+        {text: 'CLOSE'},
+      ],
+      { cancelable: false }
+    )
+
   }
 
   render () {
-    const {currentDeck} = this.props
-    const quizNum = currentDeck
-      ? currentDeck.questions.length
-      : 0
-    const title = currentDeck
-      ? `${currentDeck.title}`
-      : " "
+    const {currentDeck, _isMounted} = this.props
+
+    const title = _isMounted? `${currentDeck.title}`:""
+    const quizNum = _isMounted? `${currentDeck.questions.length}`: ""
+
 
     return (
       <View style={styles.container}>
         <MainDeckHeader
           title={title}
+          leftNavType={"HOME"}
         />
         <View style={styles.buttonContainer}>
           <QuizButton
@@ -32,17 +45,15 @@ export default class DeckDetail extends Component {
           />
           <QuizButton
             title="START QUIZ"
-            onPress={this.props.openStartQuiz}
+            onPress={() => this.startQuiz(quizNum)}
           />
         </View>
-        <View style={styles.cardNumLabel}>
-          <Text>{quizNum} Cards</Text>
-        </View>
-
-        {currentDeck &&
+        <CardsNum
+          quizNum={quizNum}
+        />
+        {_isMounted &&
         <QuizCards
           list={currentDeck.questions}
-          quizNum={quizNum}
         />
         }
       </View>
@@ -57,6 +68,11 @@ const QuizButton = ({title, onPress}) =>
     onPress={onPress}
     buttonStyle={styles.button}
   />
+
+const CardsNum = ({quizNum = 0}) =>
+  <View style={styles.cardNumLabel}>
+    <Text>{`${quizNum} Cards`}</Text>
+  </View>
 
 const QuizCards = ({list, quizNum = 0}) =>
   <ScrollView>
