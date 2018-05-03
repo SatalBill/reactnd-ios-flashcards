@@ -12,10 +12,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    clearDeck: () => {
-      dispatch(clearDeck())
-    },
-
     loadFonts: () => {
       dispatch(loadFonts())
     },
@@ -34,8 +30,6 @@ const mapDispatchToProps = dispatch => {
     },
   }
 }
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(DeckList)
 
