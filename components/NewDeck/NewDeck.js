@@ -28,7 +28,7 @@ export default class NewDeck extends Component {
     }
   }
 
-  submit = () => {
+  submit = async () => {
     const {title, _isFilled} = this.state
     const {list} = this.props
     if (_isFilled) {
@@ -36,8 +36,8 @@ export default class NewDeck extends Component {
         this.setState({_isError: true})
       }
       else {
-        this.props.addDeck({title})
-        return this.props.goToBack()
+        // await this.props.addDeck()
+        this.props.openDeckDetail({title})
       }
     }
   }
