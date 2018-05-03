@@ -37,7 +37,7 @@ export const addDeck = (deck) => {
     [deck.title]: {
       id: ID(),
       title: deck.title,
-      questions: {}
+      questions: [],
     }
   }
 
@@ -47,7 +47,7 @@ export const addDeck = (deck) => {
         AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
             ...newDeck
           }), () =>
-            dispatch({type: ADD_DECK, newDeck})
+            dispatch({type: ADD_DECK, newDeck, currentDeck: newDeck[deck.title]})
         )
       }
     })
