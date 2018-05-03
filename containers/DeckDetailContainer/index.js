@@ -5,6 +5,7 @@ import { clearDeck, openNewQuiz, openStartQuiz } from "../../actions"
 const mapStateToProps = state => {
   return {
     currentDeck: state.decks.currentDeck,
+    _isMounted: state.decks.currentDeck? true : false
   }
 }
 
