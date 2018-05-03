@@ -10,20 +10,15 @@ export default class DeckList extends Component {
 
   async componentDidMount () {
     this._isMounted = true
+    this._isMounted &&
     await Font.loadAsync({
       "heebo-medium": require("../../assets/fonts/Heebo/Heebo-Medium.ttf"),
     })
-    await this.props.loadFonts()
-    await this.props.initDecks()
+    await Promise.all[this.props.loadFonts(),this.props.initDecks()]
   }
 
   componentWillUnmount () {
     this._isMounted = false
-  }
-
-  openDeck = (searchKey) => {
-    this.props.receiveDeck(searchKey)
-    this.props.openDeckDetail()
   }
 
   render () {
@@ -54,7 +49,7 @@ export default class DeckList extends Component {
 
             <Decks
               list={list}
-              onPress={this.openDeck}
+              onPress={this.props.openDeck}
             />
             }
           </ScrollView>
