@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  button: {
+    marginRight: 10
+  },
   label: {
     position: "absolute",
     top: 0,
@@ -38,7 +41,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonContainer: {
-    justifyContent: 'center',
+    flex: 1,
+    justifyContent: 'space-between',
+    flexDirection: "row",
     alignItems: 'center',
     backgroundColor: "#fff",
   }
