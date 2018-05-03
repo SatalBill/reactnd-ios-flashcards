@@ -22,9 +22,7 @@ const GoBackIcon = (props) => {
       break
     default:
       break
-
   }
-  console.log(status)
 
   return (
     <TouchableOpacity
