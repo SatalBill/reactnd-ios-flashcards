@@ -14,7 +14,8 @@ export default class DeckList extends Component {
     await Font.loadAsync({
       "heebo-medium": require("../../assets/fonts/Heebo/Heebo-Medium.ttf"),
     })
-    await Promise.all[this.props.loadFonts(),this.props.initDecks()]
+    this.props.loadFonts()
+    this.props.initDecks()
   }
 
   componentWillUnmount () {
@@ -46,7 +47,6 @@ export default class DeckList extends Component {
         <View style={styles.decklist}>
           <ScrollView>
             {list &&
-
             <Decks
               list={list}
               onPress={this.props.openDeck}

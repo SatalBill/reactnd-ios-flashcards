@@ -6,9 +6,6 @@ import MainDeckHeader from "../MainDeckHeader"
 import styles from "./styles"
 
 export default class DeckDetail extends Component {
-  componentDidMount () {
-    this.props.clearDeck()
-  }
 
   startQuiz (quizNum) {
     return Number(quizNum) > 0 ? this.props.openStartQuiz(): this.showAlert()
@@ -23,15 +20,13 @@ export default class DeckDetail extends Component {
       ],
       { cancelable: false }
     )
-
   }
 
   render () {
-    const {currentDeck, _isMounted} = this.props
+    const {currentDeck, _isMountedProp} = this.props
 
-    const title = _isMounted? `${currentDeck.title}`:""
-    const quizNum = _isMounted? `${currentDeck.questions.length}`: ""
-
+    const title = _isMountedProp? `${currentDeck.title}`:""
+    const quizNum = _isMountedProp? `${currentDeck.questions.length}`: ""
 
     return (
       <View style={styles.container}>
@@ -52,7 +47,7 @@ export default class DeckDetail extends Component {
         <CardsNum
           quizNum={quizNum}
         />
-        {_isMounted &&
+        {_isMountedProp &&
         <QuizCards
           list={currentDeck.questions}
         />

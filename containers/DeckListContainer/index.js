@@ -12,6 +12,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+
     loadFonts: () => {
       dispatch(loadFonts())
     },
@@ -22,7 +23,7 @@ const mapDispatchToProps = dispatch => {
 
     openDeck: (id) => {
       dispatch(receiveDeck(id))
-      dispatch(openDeckDetail())
+      return dispatch(openDeckDetail())
     },
 
     openNewDeck: () => {
