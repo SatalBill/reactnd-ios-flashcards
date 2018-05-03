@@ -11,7 +11,7 @@ export default {
         question: "Where do you make Ajax requests in React?",
         answer:   "The componentDidMount lifecycle event"
       }
-    ]
+    ],
   },
   JavaScript: {
     id: '_d8uxq6haj',
