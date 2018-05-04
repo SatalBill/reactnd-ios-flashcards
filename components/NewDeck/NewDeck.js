@@ -18,6 +18,7 @@ export default class NewDeck extends Component {
 
   onTitleChange = (title) => {
     const _isFilled = title.length > 0
+    title = title.trim()
     this.setState({title, _isFilled})
     this.initErrorMessage(_isFilled)
   }
@@ -36,7 +37,6 @@ export default class NewDeck extends Component {
         this.setState({_isError: true})
       }
       else {
-        // await this.props.addDeck()
         this.props.openDeckDetail({title})
       }
     }
@@ -60,8 +60,6 @@ export default class NewDeck extends Component {
           />
           <Button
             title="SUBMIT"
-            //loading
-            //loadingProps={{ size: "large", color: "rgba(111, 202, 186, 1)" }}
             titleStyle={{fontWeight: "700"}}
             buttonStyle={buttonStyle}
             containerStyle={{marginTop: 20}}

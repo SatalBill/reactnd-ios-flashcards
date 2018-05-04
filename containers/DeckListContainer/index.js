@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 import DeckList from "../../components/DeckList"
-import { initDecks, receiveDeck, openNewDeck, openDeckDetail, loadFonts, clearDeck } from "../../actions"
+import { initDecks, receiveDeck, openNewDeck, openDeckDetail, loadFonts } from "../../actions"
 
 const mapStateToProps = state => {
   return {

@@ -14,6 +14,7 @@ const decks = (state = INITIAL_STATE, action) => {
         ...state,
         list
       }
+
     case DECKS_AVAILABLE:
       return {
         ...state,
@@ -31,6 +32,7 @@ const decks = (state = INITIAL_STATE, action) => {
       }
 
     case RECEIVE_DECK:
+
       return {
         ...state,
         currentDeck

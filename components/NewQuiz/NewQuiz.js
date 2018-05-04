@@ -19,11 +19,13 @@ export default class NewCard extends Component {
 
   onQuestionChange = (question) => {
     const _isFilledQuestion = question.length > 0
+    question = question.trim()
     this.setState({question, _isFilledQuestion})
   }
 
   onAnswerChange = (answer) => {
     const _isFilledAnswer = answer.length > 0
+    answer = answer.trim()
     this.setState({answer, _isFilledAnswer})
   }
 
