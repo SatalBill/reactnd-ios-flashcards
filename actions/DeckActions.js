@@ -5,34 +5,31 @@ import { ID } from "../utils/helper"
 
 const DECK_STORAGE_KEY = "FlashCard:Deck"
 
-const getDecks = () => {
-  return (dispatch) => {
-    AsyncStorage.getItem(DECK_STORAGE_KEY, (err, decks) => {
-      dispatch({type: DECKS_AVAILABLE, list: JSON.parse(decks)})
-    })
-  }
+const getDecks = () => dispatch => {
+  AsyncStorage.getItem(DECK_STORAGE_KEY, (err, decks) => {
+    dispatch({type: DECKS_AVAILABLE, list: JSON.parse(decks)})
+  })
 }
 
-const setDecks = () => {
-  return (dispatch) => {
-    AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(SampleData), () =>
-      dispatch({type: INIT_DECKS, list: SampleData})
-    )
-  }
+const setDecks = () => dispatch => {
+  AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(SampleData), () =>
+    dispatch({type: INIT_DECKS, list: SampleData})
+  )
 }
 
-
-export const initDecks = () => {
-  return (dispatch) => {
-    AsyncStorage.getItem(DECK_STORAGE_KEY, (err, decks) => {
-      decks = JSON.parse(decks)
-      let isEmpty =  decks === null? true : false
-      return isEmpty ? dispatch(setDecks()) : dispatch(getDecks())
-    })
-  }
+export const initDecks = () => dispatch => {
+  AsyncStorage.getItem(DECK_STORAGE_KEY, (err, decks) => {
+    decks = JSON.parse(decks)
+    let isEmpty = decks === null
+      ? true
+      : false
+    return isEmpty
+      ? dispatch(setDecks())
+      : dispatch(getDecks())
+  })
 }
 
-export const addDeck = (deck) => {
+export const addDeck = deck => {
   const newDeck = {
     [deck.title]: {
       id: ID(),
@@ -60,21 +57,19 @@ export const clearDeck = () => {
   }
 }
 
-export const receiveDeck = (searchKey) => {
-  return (dispatch) => {
-    AsyncStorage.getItem(DECK_STORAGE_KEY, (err, decks) => {
-      decks = JSON.parse(decks)
-      // get object matching with searchKey
-      const currentDeck = Object.keys(decks).map(key =>
-        decks[key].id === searchKey && decks[key]
-      ).filter(e => e)[0]
-      dispatch({type: RECEIVE_DECK, currentDeck})
-    })
-  }
+export const receiveDeck = searchKey => dispatch => {
+  AsyncStorage.getItem(DECK_STORAGE_KEY, (err, decks) => {
+    decks = JSON.parse(decks)
+    // get object matching with searchKey
+    const currentDeck = Object.keys(decks).map(key =>
+      decks[key].id === searchKey && decks[key]
+    ).filter(e => e)[0]
+    dispatch({type: RECEIVE_DECK, currentDeck})
+  })
 }
 
 // add new quiz
-export const addQuizToDeck = (content) => {
+export const addQuizToDeck = content => {
   const newQuiz = {
     question: content.question,
     answer: content.answer,
